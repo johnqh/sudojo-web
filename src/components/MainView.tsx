@@ -39,7 +39,7 @@ const MainView: React.FC<MainViewProps> = ({
       </Link>,
     ];
 
-    if (selectedMenu === 'Settings' || location.pathname.includes('/settings')) {
+    if (location.pathname.includes('/settings')) {
       breadcrumbs.push(
         <Link
           key="settings"
@@ -52,7 +52,7 @@ const MainView: React.FC<MainViewProps> = ({
         </Link>
       );
 
-      if (location.pathname.includes('/settings/general')) {
+      if (location.pathname === '/settings/general') {
         breadcrumbs.push(<Typography key="general" color="textPrimary">General Settings</Typography>);
       }
     } else if (selectedMenu !== 'Home') {
@@ -85,10 +85,8 @@ const MainView: React.FC<MainViewProps> = ({
       >
         {selectedMenu === 'Home' && <Home />}
         {selectedMenu === 'Profile' && <ProfileView profileItems={profileItems} />}
-        {selectedMenu === 'Settings' && !location.pathname.includes('/settings/general') && (
-          <SettingsView settingsItems={settingsItems} />
-        )}
-        {location.pathname.includes('/settings/general') && <GeneralSettings />} {/* Render GeneralSettings */}
+        {selectedMenu === 'Settings' && <SettingsView settingsItems={settingsItems} />}
+        {location.pathname === '/settings/general' && <GeneralSettings />} {/* Render GeneralSettings */}
         {selectedMenu === 'About' && <AboutView />}
       </div>
     </div>

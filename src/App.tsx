@@ -7,6 +7,7 @@ import AppBarComponent from './components/AppBarComponent';
 import DrawerComponent from './components/DrawerComponent';
 import MainView from './components/MainView';
 import GeneralSettings from './components/GeneralSettings'; // Import GeneralSettings component
+import Footer from './components/Footer'; // Import Footer
 import { ProfileItem, MenuItem, SettingsItem } from './types';
 
 // Import Material UI icons
@@ -24,8 +25,7 @@ const menuItems: MenuItem[] = [
   { name: 'About', icon: <InfoIcon />, path: '/about' },
 ];
 
-// Sample data for profile items and settings items// src/App.tsx
-
+// Sample data for profile items and settings items
 const profileItems: ProfileItem[] = [
   { image: 'https://via.placeholder.com/64', title: 'User 1', subtext: 'Description 1' },
   { image: 'https://via.placeholder.com/64', title: 'User 2', subtext: 'Description 2' },
@@ -50,12 +50,9 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       {/* AppBar */}
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <AppBarComponent handleDrawerToggle={handleDrawerToggle} />
         </Toolbar>
@@ -77,17 +74,23 @@ const AppContent: React.FC = () => {
           p: 3,
           marginLeft: { sm: `${drawerWidth}px` },
           marginTop: '64px', // Offset for AppBar
-          zIndex: 1, // Ensure Main Content has lower z-index
+          overflowY: 'auto', // Ensure scrolling if needed
         }}
       >
         <Routes>
-          <Route path="/" element={<MainView selectedMenu="Home" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
+          <Route 
+            path="/" 
+            element={<MainView selectedMenu="Home" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} 
+          />
           <Route path="/profile" element={<MainView selectedMenu="Profile" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
           <Route path="/settings" element={<MainView selectedMenu="Settings" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
           <Route path="/about" element={<MainView selectedMenu="About" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
-          <Route path="/settings/general" element={<GeneralSettings />} /> {/* Route for General Settings */}
+          <Route path="/settings/general" element={<GeneralSettings />} />
         </Routes>
       </Box>
+
+      {/* Footer - positioned below the main content and drawer */}
+      <Footer /> 
     </Box>
   );
 };

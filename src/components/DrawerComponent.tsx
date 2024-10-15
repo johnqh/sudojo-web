@@ -35,7 +35,12 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
         ModalProps={{ keepMounted: true }} // Keeps the drawer mounted
         sx={{
           display: { xs: 'block', sm: 'none' }, // Show on mobile only
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: '64px' }, // Ensure drawer starts below the AppBar
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: drawerWidth, 
+            top: '64px', // Ensure drawer starts below the AppBar
+            backgroundColor: '#f0f0f0', // Set background color to light gray
+          },
         }}
       >
         <List>
@@ -57,6 +62,7 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
             boxSizing: 'border-box',
             width: drawerWidth,
             top: '64px', // Start the drawer below the app bar
+            backgroundColor: '#f0f0f0', // Set background color to light gray
           },
         }}
         open
