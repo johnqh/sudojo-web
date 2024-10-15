@@ -1,38 +1,47 @@
 // src/components/FirebaseAuth.tsx
 
 import React, { useEffect, useRef } from 'react';
-import firebaseui from 'firebaseui'; // Import firebaseui v4.x.x directly
-import 'firebaseui/dist/firebaseui.css'; // FirebaseUI CSS
 import firebase from 'firebase/app'; // Firebase v8 import
-import { auth } from '../firebase'; // Firebase v8 auth instance
+import 'firebase/auth'; // Firebase Auth
+import * as firebaseui from 'firebaseui'; // FirebaseUI import
+import 'firebaseui/dist/firebaseui.css'; // FirebaseUI CSS
 import { Box } from '@mui/material';
+import { auth } from '../firebase'; // Firebase auth instance
+
+// Manually declare the type for FirebaseUI since there are no official TypeScript types
+interface FirebaseUIAuth {
+  start: (element: HTMLElement, config: any) => void;
+  reset: () => void;
+}
+
+let ui: FirebaseUIAuth | null = null; // Store the FirebaseUI instance
 
 const FirebaseAuthComponent: React.FC = () => {
   const uiRef = useRef<HTMLDivElement>(null);
 
   const uiConfig = {
-    signInFlow: 'popup' as const, // or 'redirect'
+    signInFlow: 'popup',
     signInOptions: [
-      firebase.auth.EmailAuthProvider.PROVIDER_ID, // Use Firebase's auth providers
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID, // Google Auth
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
-      signInSuccessWithAuthResult: () => {
-        return false; // Prevent automatic redirects after sign-in
-      },
+      signInSuccessWithAuthResult: () => false, // Prevent automatic redirects
     },
   };
 
   useEffect(() => {
-    // Use FirebaseUI AuthUI with Firebase v8
-    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
+    if (!ui) {
+      // Create a new FirebaseUI instance
+      ui = new (firebaseui as any).AuthUI(auth);
+    }
 
-    if (uiRef.current) {
-      ui.start(uiRef.current, uiConfig);
+    if (uiRef.current && ui) { // Ensure ui is not null
+      ui.start(uiRef.current, uiConfig); // Start the FirebaseUI widget
     }
 
     return () => {
-      ui.reset();
+      ui?.reset(); // Cleanup the FirebaseUI instance when the component unmounts
     };
   }, [uiConfig]);
 

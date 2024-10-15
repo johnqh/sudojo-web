@@ -28,8 +28,8 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
         onClose={handleDrawerToggle}
         ModalProps={{ keepMounted: true }} // Keeps the drawer mounted
         sx={{
-          display: { xs: 'block', sm: 'none' }, // Show on mobile
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          display: { xs: 'block', sm: 'none' }, // Show on mobile only
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: '64px' }, // Ensure drawer starts below the AppBar
         }}
       >
         <List>
@@ -46,8 +46,12 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', sm: 'block' }, // Show on desktop
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          display: { xs: 'none', sm: 'block' }, // Show on desktop only
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
+            top: '64px', // Start the drawer below the app bar
+          },
         }}
         open
       >
