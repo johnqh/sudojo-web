@@ -1,24 +1,14 @@
-/* Global styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* src/App.css */
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-}
-
-.login-btn {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
+/* Ensure the main content area has proper padding and layout */
 .main-view {
-  text-align: center;
+  padding: 16px;
 }
+
+/* Customize the appearance of the Sudoku board canvas */
+canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Add any additional global styles here */

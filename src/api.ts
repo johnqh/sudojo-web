@@ -1,4 +1,6 @@
-const API_BASE_URL = 'https://api.example.com'; // Replace with your actual API URL
+// src/api.ts
+
+const API_BASE_URL = 'https://api.example.com'; // Replace with your actual API base URL
 
 // Example API call: Fetch data from a REST endpoint using fetch
 export const fetchData = async (endpoint: string) => {
@@ -6,7 +8,7 @@ export const fetchData = async (endpoint: string) => {
     const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
       method: 'GET',
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }

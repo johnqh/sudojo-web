@@ -1,3 +1,5 @@
+// src/components/Tile.tsx
+
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 
@@ -15,7 +17,7 @@ const Tile: React.FC<TileProps> = ({ image, title, subtext }) => {
           component="img"
           image={image}
           alt={title}
-          sx={{ width: 32, height: 32 }}
+          sx={{ width: 64, height: 64, borderRadius: '50%' }}
         />
       </Box>
       <CardContent>

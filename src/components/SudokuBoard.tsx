@@ -1,4 +1,4 @@
-// src/SudokuBoard.tsx
+// src/components/SudokuBoard.tsx
 
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -45,8 +45,72 @@ const SudokuBoard: React.FC = () => {
       { value: 6, pencilmarks: [] },
       { value: 0, pencilmarks: [1, 2, 4, 7] },
     ],
-    // Initialize the remaining rows similarly...
-    // For brevity, only the first three rows are shown here
+    [
+      { value: 8, pencilmarks: [] },
+      { value: 0, pencilmarks: [5] },
+      { value: 0, pencilmarks: [1, 2] },
+      { value: 0, pencilmarks: [7, 9] },
+      { value: 6, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 4] },
+      { value: 0, pencilmarks: [3, 4, 5] },
+      { value: 0, pencilmarks: [2, 5] },
+      { value: 3, pencilmarks: [] },
+    ],
+    [
+      { value: 4, pencilmarks: [] },
+      { value: 0, pencilmarks: [2, 5] },
+      { value: 0, pencilmarks: [3, 5] },
+      { value: 8, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 5] },
+      { value: 3, pencilmarks: [] },
+      { value: 0, pencilmarks: [2, 5] },
+      { value: 0, pencilmarks: [4, 5] },
+      { value: 1, pencilmarks: [] },
+    ],
+    [
+      { value: 7, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 3, 4, 9] },
+      { value: 0, pencilmarks: [1, 3, 4] },
+      { value: 0, pencilmarks: [8] },
+      { value: 2, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 4] },
+      { value: 0, pencilmarks: [1, 3, 4, 9] },
+      { value: 0, pencilmarks: [3, 4, 5] },
+      { value: 6, pencilmarks: [] },
+    ],
+    [
+      { value: 0, pencilmarks: [1, 3, 5] },
+      { value: 6, pencilmarks: [] },
+      { value: 0, pencilmarks: [4, 5] },
+      { value: 0, pencilmarks: [1, 5] },
+      { value: 0, pencilmarks: [3, 4] },
+      { value: 0, pencilmarks: [1, 4, 5] },
+      { value: 2, pencilmarks: [] },
+      { value: 8, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 3, 4] },
+    ],
+    [
+      { value: 0, pencilmarks: [1, 2, 3] },
+      { value: 0, pencilmarks: [3, 4, 5] },
+      { value: 0, pencilmarks: [4, 5] },
+      { value: 0, pencilmarks: [1, 2] },
+      { value: 8, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 2] },
+      { value: 0, pencilmarks: [1, 2, 3, 5] },
+      { value: 7, pencilmarks: [] },
+      { value: 9, pencilmarks: [] },
+    ],
+    [
+      { value: 0, pencilmarks: [1, 2, 3] },
+      { value: 0, pencilmarks: [2, 4, 5] },
+      { value: 0, pencilmarks: [1, 3, 4] },
+      { value: 0, pencilmarks: [1, 2, 5] },
+      { value: 8, pencilmarks: [] },
+      { value: 0, pencilmarks: [1, 3, 4] },
+      { value: 0, pencilmarks: [1, 2, 4] },
+      { value: 7, pencilmarks: [] },
+      { value: 9, pencilmarks: [] },
+    ],
   ];
 
   const [puzzle, setPuzzle] = useState<Cell[][]>(initialPuzzle);

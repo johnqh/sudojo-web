@@ -1,3 +1,5 @@
+// src/components/GeneralSettings.tsx
+
 import React, { useState } from 'react';
 import { Box, Typography, FormControl, FormControlLabel, Checkbox, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
@@ -9,8 +11,7 @@ const GeneralSettings: React.FC = () => {
     setChecked(event.target.checked);
   };
 
-  // Use SelectChangeEvent instead of ChangeEvent for the Select component
-  const handleSelectChange = (event: SelectChangeEvent) => {
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
     setSelectedOption(event.target.value as string);
   };
 
@@ -30,7 +31,9 @@ const GeneralSettings: React.FC = () => {
 
       {/* Select Menu Item */}
       <FormControl fullWidth sx={{ mt: 2 }}>
-        <Typography variant="h6">Select Option</Typography>
+        <Typography variant="h6" gutterBottom>
+          Select Option
+        </Typography>
         <Select value={selectedOption} onChange={handleSelectChange} displayEmpty>
           <MenuItem value=""><em>None</em></MenuItem>
           <MenuItem value="option1">Option 1</MenuItem>
