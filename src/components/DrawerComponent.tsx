@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Drawer, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { MenuItem } from '../types';
 
 interface DrawerComponentProps {
   mobileOpen: boolean;
   handleDrawerToggle: () => void;
   menuItems: MenuItem[];
-  handleMenuClick: (menu: string) => void;
   drawerWidth: number;
 }
 
@@ -16,9 +16,15 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
   mobileOpen,
   handleDrawerToggle,
   menuItems,
-  handleMenuClick,
   drawerWidth,
 }) => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = (path: string) => {
+    navigate(path);
+    handleDrawerToggle();
+  };
+
   return (
     <>
       {/* Temporary drawer for mobile */}
@@ -34,7 +40,7 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
       >
         <List>
           {menuItems.map((item) => (
-            <ListItemButton key={item.name} onClick={() => handleMenuClick(item.name)}>
+            <ListItemButton key={item.name} onClick={() => handleMenuClick(item.path)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItemButton>
@@ -57,7 +63,7 @@ const DrawerComponent: React.FC<DrawerComponentProps> = ({
       >
         <List>
           {menuItems.map((item) => (
-            <ListItemButton key={item.name} onClick={() => handleMenuClick(item.name)}>
+            <ListItemButton key={item.name} onClick={() => handleMenuClick(item.path)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItemButton>

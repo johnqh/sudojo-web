@@ -2,9 +2,12 @@
 
 import { JSXElementConstructor, ReactElement } from 'react';
 
+// src/types.ts
+
 export interface MenuItem {
   name: string;
-  icon: ReactElement<any, string | JSXElementConstructor<any>>;
+  icon: JSX.Element;
+  path: string; // Add the path property for navigation
 }
 
 export interface ProfileItem {

@@ -114,6 +114,10 @@ const SudokuBoard: React.FC = () => {
   ];
 
   const [puzzle, setPuzzle] = useState<Cell[][]>(initialPuzzle);
+  const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null); // Track the selected cell
+
+  const cellSize = 450 / 9; // Each cell is 50x50
+
 
   const drawBoard = (ctx: CanvasRenderingContext2D, puzzle: Cell[][]) => {
     const size = 450; // Canvas size: 450x450
@@ -138,10 +142,22 @@ const SudokuBoard: React.FC = () => {
         const x = colIndex * cellSize;
         const y = rowIndex * cellSize;
 
+        // Check if the current cell is selected
+        const isSelected = selectedCell && selectedCell.row === rowIndex && selectedCell.col === colIndex;
+
+        // Highlight the selected cell
+        if (isSelected) {
+          ctx.fillStyle = 'black'; // Black background for selected cell
+          ctx.fillRect(x, y, cellSize, cellSize);
+        }
+        // Ensure the text color is reset for each cell
+        ctx.fillStyle = isSelected ? 'black' : 'white'; // White text if selected, black otherwise
+
+
         if (cell.value !== 0) {
           // Draw the main number
           ctx.font = '20px Arial';
-          ctx.fillStyle = '#000';
+          ctx.fillStyle = isSelected ? 'white' : 'black';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText(
@@ -167,19 +183,43 @@ const SudokuBoard: React.FC = () => {
             ctx.fillText(`${mark}`, markX, markY);
           });
         }
+        // Draw pink border for the selected cell
+        if (isSelected) {
+          ctx.strokeStyle = 'pink';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x, y, cellSize, cellSize);
+        }
       });
     });
   };
 
+  // Handle clicks on the canvas
+  const handleClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left; // Get X coordinate within the canvas
+    const y = event.clientY - rect.top; // Get Y coordinate within the canvas
+
+    // Calculate the clicked row and column
+    const col = Math.floor(x / cellSize);
+    const row = Math.floor(y / cellSize);
+
+    // Update the selected cell
+    setSelectedCell({ row, col });
+  };
+
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        drawBoard(ctx, puzzle);
+        drawBoard(ctx, puzzle); // Redraw the board when the puzzle or selected cell changes
       }
     }
-  }, [puzzle]); // Redraw whenever puzzle changes
+  }, [puzzle, selectedCell]); // Redraw whenever puzzle or selectedCell changes
 
   return (
     <canvas
@@ -187,6 +227,7 @@ const SudokuBoard: React.FC = () => {
       width={450}
       height={450}
       style={{ border: '1px solid black', maxWidth: '100%', height: 'auto' }}
+      onClick={handleClick} // Add click handler
     />
   );
 };

@@ -23,6 +23,3 @@ const TileSection: React.FC<TileSectionProps> = ({ title, items }) => {
 };
 
 export default TileSection;
-
-// Fix: Add this empty export statement to treat the file as a module
-export {};

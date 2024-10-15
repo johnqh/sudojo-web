@@ -1,11 +1,12 @@
 // src/App.tsx
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Box, CssBaseline } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box, CssBaseline, AppBar, Toolbar } from '@mui/material';
 import AppBarComponent from './components/AppBarComponent';
 import DrawerComponent from './components/DrawerComponent';
 import MainView from './components/MainView';
+import GeneralSettings from './components/GeneralSettings'; // Import GeneralSettings component
 import { ProfileItem, MenuItem, SettingsItem } from './types';
 
 // Import Material UI icons
@@ -17,13 +18,14 @@ import InfoIcon from '@mui/icons-material/Info';
 const drawerWidth = 240;
 
 const menuItems: MenuItem[] = [
-  { name: 'Home', icon: <HomeIcon /> },
-  { name: 'Profile', icon: <AccountCircleIcon /> },
-  { name: 'Settings', icon: <SettingsIcon /> },
-  { name: 'About', icon: <InfoIcon /> },
+  { name: 'Home', icon: <HomeIcon />, path: '/' },
+  { name: 'Profile', icon: <AccountCircleIcon />, path: '/profile' },
+  { name: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  { name: 'About', icon: <InfoIcon />, path: '/about' },
 ];
 
-// Add more sample profile data for the tiles
+// Sample data for profile items and settings items// src/App.tsx
+
 const profileItems: ProfileItem[] = [
   { image: 'https://via.placeholder.com/64', title: 'User 1', subtext: 'Description 1' },
   { image: 'https://via.placeholder.com/64', title: 'User 2', subtext: 'Description 2' },
@@ -33,25 +35,15 @@ const profileItems: ProfileItem[] = [
   { image: 'https://via.placeholder.com/64', title: 'User 6', subtext: 'Description 6' },
   { image: 'https://via.placeholder.com/64', title: 'User 7', subtext: 'Description 7' },
   { image: 'https://via.placeholder.com/64', title: 'User 8', subtext: 'Description 8' },
-  { image: 'https://via.placeholder.com/64', title: 'User 9', subtext: 'Description 9' },
-  { image: 'https://via.placeholder.com/64', title: 'User 10', subtext: 'Description 10' },
 ];
 
-// Mock settings items
 const settingsItems: SettingsItem[] = [
-  { title: 'General Settings', subtitle: 'Manage your general preferences' },
-  { title: 'Privacy Settings', subtitle: 'Control your privacy options' },
-];
-
-// Mock API data
-const apiData = [
-  { id: 1, name: 'API Data Item 1' },
-  { id: 2, name: 'API Data Item 2' },
+  { title: 'General Settings', subtitle: 'Manage general preferences' },
+  { title: 'Privacy Settings', subtitle: 'Manage privacy settings' },
 ];
 
 const AppContent: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState('Home');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -59,29 +51,42 @@ const AppContent: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBarComponent handleDrawerToggle={handleDrawerToggle} />
+      {/* AppBar */}
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <Toolbar>
+          <AppBarComponent handleDrawerToggle={handleDrawerToggle} />
+        </Toolbar>
+      </AppBar>
+
+      {/* Drawer */}
       <DrawerComponent
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         menuItems={menuItems}
-        handleMenuClick={setSelectedMenu}
         drawerWidth={drawerWidth}
       />
+
+      {/* Main Content */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          padding: 3,
+          p: 3,
           marginLeft: { sm: `${drawerWidth}px` },
-          marginTop: '64px',
+          marginTop: '64px', // Offset for AppBar
+          zIndex: 1, // Ensure Main Content has lower z-index
         }}
       >
-        <MainView
-          selectedMenu={selectedMenu}
-          profileItems={profileItems}
-          settingsItems={settingsItems}
-          apiData={apiData}
-        />
+        <Routes>
+          <Route path="/" element={<MainView selectedMenu="Home" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
+          <Route path="/profile" element={<MainView selectedMenu="Profile" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
+          <Route path="/settings" element={<MainView selectedMenu="Settings" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
+          <Route path="/about" element={<MainView selectedMenu="About" profileItems={profileItems} settingsItems={settingsItems} apiData={[]} />} />
+          <Route path="/settings/general" element={<GeneralSettings />} /> {/* Route for General Settings */}
+        </Routes>
       </Box>
     </Box>
   );
