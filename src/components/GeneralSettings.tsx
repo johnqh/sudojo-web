@@ -18,9 +18,11 @@ const GeneralSettings: React.FC = () => {
   return (
     <Box
       sx={{
-        flexGrow: 1,          // Fill available space in parent container
-        overflowY: 'auto',    // Allow vertical scrolling when content overflows
+        flexGrow: 1,          // Allow the component to fill the available space
+        overflowY: 'auto',    // Enable scrolling when content overflows
         padding: 2,
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <Typography variant="h5" gutterBottom>
@@ -58,7 +60,7 @@ const GeneralSettings: React.FC = () => {
           </ListItem>
         ))}
 
-        {/* First popup menu control */}
+        {/* Popup menus */}
         <ListItem>
           <FormControl fullWidth>
             <InputLabel id="select-option1-label">Select Language</InputLabel>
@@ -75,7 +77,6 @@ const GeneralSettings: React.FC = () => {
           </FormControl>
         </ListItem>
 
-        {/* Second popup menu control */}
         <ListItem>
           <FormControl fullWidth>
             <InputLabel id="select-option2-label">Select Theme</InputLabel>

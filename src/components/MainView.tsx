@@ -3,7 +3,9 @@
 import React from 'react';
 import { ProfileItem, SettingsItem } from '../types';
 import Home from './Home';
-import TileSection from './TileSection';
+import SettingsView from './SettingsView';
+import ProfileView from './ProfileView';
+import AboutView from './AboutView'; // Import the AboutView component
 import { useNavigate } from 'react-router-dom';
 
 interface MainViewProps {
@@ -17,7 +19,6 @@ const MainView: React.FC<MainViewProps> = ({
   selectedMenu,
   profileItems,
   settingsItems,
-  apiData,
 }) => {
   const navigate = useNavigate();
 
@@ -26,54 +27,23 @@ const MainView: React.FC<MainViewProps> = ({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh', // Make sure it takes the full viewport height
+        height: '100vh',
       }}
     >
-      {/* Title */}
       <h1>{selectedMenu}</h1>
 
-      {/* Content area */}
       <div
         style={{
-          flexGrow: 1,         // Ensure it grows to take available space
-          overflow: 'hidden',  // Prevent the entire content from overflowing
-          display: 'flex',     // Flex container for children
+          flexGrow: 1,
+          overflow: 'hidden',
+          display: 'flex',
           flexDirection: 'column',
         }}
       >
         {selectedMenu === 'Home' && <Home />}
-        
-        {selectedMenu === 'Profile' && (
-          <>
-            <TileSection title="First Section" items={profileItems.slice(0, 4)} />
-            <TileSection title="Second Section" items={profileItems.slice(4)} />
-          </>
-        )}
-
-        {selectedMenu === 'Settings' && (
-          <div
-            style={{
-              flexGrow: 1,           // Make the settings content fill the remaining space
-              overflowY: 'auto',     // Allow scrolling for settings content
-            }}
-          >
-            <h2>Settings</h2>
-            {settingsItems.map((item, index) => (
-              <div
-                key={index}
-                style={{ cursor: 'pointer', padding: '10px', borderBottom: '1px solid #ccc' }}
-                onClick={() => {
-                  if (item.title === 'General Settings') {
-                    navigate('/settings/general'); // Navigate to General Settings
-                  }
-                }}
-              >
-                <h3>{item.title}</h3>
-                <p>{item.subtitle}</p>
-              </div>
-            ))}
-          </div>
-        )}
+        {selectedMenu === 'Profile' && <ProfileView profileItems={profileItems} />}
+        {selectedMenu === 'Settings' && <SettingsView settingsItems={settingsItems} />}
+        {selectedMenu === 'About' && <AboutView />} {/* Render AboutView when "About" is selected */}
       </div>
     </div>
   );
