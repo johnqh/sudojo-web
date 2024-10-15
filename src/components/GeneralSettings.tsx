@@ -2,17 +2,13 @@
 
 import React, { useState } from 'react';
 import { Box, FormControl, InputLabel, MenuItem, Select, Typography, List, ListItem } from '@mui/material';
-import Toggle from './Toggle'; // Import Toggle component
+import Toggle from './Toggle';
 
 const GeneralSettings: React.FC = () => {
-  // State for checkboxes and dropdowns
-  const [checkboxValues, setCheckboxValues] = useState(
-    Array(30).fill(false) // 20 for section 1 and 10 for section 2
-  );
+  const [checkboxValues, setCheckboxValues] = useState(Array(30).fill(false));
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
 
-  // Handle checkbox state
   const handleCheckboxChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCheckboxValues = [...checkboxValues];
     newCheckboxValues[index] = event.target.checked;
@@ -20,11 +16,21 @@ const GeneralSettings: React.FC = () => {
   };
 
   return (
-    <Box>
-      <Typography variant="h5" gutterBottom>General Settings</Typography>
+    <Box
+      sx={{
+        flexGrow: 1,          // Fill available space in parent container
+        overflowY: 'auto',    // Allow vertical scrolling when content overflows
+        padding: 2,
+      }}
+    >
+      <Typography variant="h5" gutterBottom>
+        General Settings
+      </Typography>
 
       {/* Section 1 */}
-      <Typography variant="h6" sx={{ mt: 3 }} gutterBottom>Section 1</Typography>
+      <Typography variant="h6" sx={{ mt: 3 }} gutterBottom>
+        Section 1
+      </Typography>
       <List>
         {Array.from({ length: 20 }).map((_, index) => (
           <ListItem key={index}>
@@ -38,7 +44,9 @@ const GeneralSettings: React.FC = () => {
       </List>
 
       {/* Section 2 */}
-      <Typography variant="h6" sx={{ mt: 3 }} gutterBottom>Section 2</Typography>
+      <Typography variant="h6" sx={{ mt: 3 }} gutterBottom>
+        Section 2
+      </Typography>
       <List>
         {Array.from({ length: 10 }).map((_, index) => (
           <ListItem key={index + 20}>
