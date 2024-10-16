@@ -15,6 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
+import Sudojo from 'Sudojo';
 
 const drawerWidth = 240;
 
