@@ -2,14 +2,19 @@ import Sudojo from 'Sudojo';
 
 export type NativeIOProtocol = Omit<
     Sudojo.com.sudobility.sudokuschool.interactors.common.NativeIOProtocol,
-  '__doNotUseOrImplementIt'
+    '__doNotUseOrImplementIt'
 >;
 export type LoginProtocol = Omit<
     Sudojo.com.sudobility.sudokuschool.interactors.common.LoginProtocol,
-  '__doNotUseOrImplementIt'
+    '__doNotUseOrImplementIt'
 >;
 export type ScreenProtocol = Omit<
     Sudojo.com.sudobility.sudokuschool.protocols.ScreenProtocol,
-  '__doNotUseOrImplementIt'
+    '__doNotUseOrImplementIt'
 >;
 
+export type AppState = Sudojo.com.sudobility.sudokuschool.statemanager.AppState;
+export type SudokuAppState =
+    Sudojo.com.sudobility.sudokuschool.statemanager.SudokuAppState;
+export type Renderable =
+    Sudojo.com.sudobility.sudokuschool.viewmodels.Renderable;

@@ -1,29 +1,29 @@
 {
     "version": "0.2.0",
     "configurations": [
-      {
-        "name": "Debug React App (Chrome)",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder}/src",
-        "sourceMaps": true,
-        "skipFiles": ["<node_internals>/**"],
-        "runtimeArgs": ["--remote-debugging-port=9222"],
-        "preLaunchTask": "npm: start",
-        "outFiles": ["${workspaceFolder}/build/**/*.js"]
-      },
-      {
-        "name": "Debug Jest Tests",
-        "type": "node",
-        "request": "launch",
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/jest",
-        "args": ["--runInBand"],
-        "cwd": "${workspaceFolder}",
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
-        "skipFiles": ["<node_internals>/**"],
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest.js"
-      }
+        {
+            "name": "Debug React App (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMaps": true,
+            "skipFiles": ["<node_internals>/**"],
+            "runtimeArgs": ["--remote-debugging-port=9222"],
+            "preLaunchTask": "npm: start",
+            "outFiles": ["${workspaceFolder}/build/**/*.js"]
+        },
+        {
+            "name": "Debug Jest Tests",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": ["--runInBand"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js"
+        }
     ]
-  }
+}

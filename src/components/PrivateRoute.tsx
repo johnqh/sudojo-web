@@ -5,18 +5,18 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
 interface PrivateRouteProps {
-  children: JSX.Element;
+    children: JSX.Element;
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
-  const { currentUser, loading } = useAuth();
+    const { currentUser, loading } = useAuth();
 
-  if (loading) {
-    // You can replace this with a spinner or loading indicator
-    return <div>Loading...</div>;
-  }
+    if (loading) {
+        // You can replace this with a spinner or loading indicator
+        return <div>Loading...</div>;
+    }
 
-  return currentUser ? children : <Navigate to="/" />;
+    return currentUser ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

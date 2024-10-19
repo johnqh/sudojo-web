@@ -5,19 +5,19 @@ import { JSXElementConstructor, ReactElement } from 'react';
 // src/types.ts
 
 export interface MenuItem {
-  name: string;
-  icon: JSX.Element;
-  path: string; // Add the path property for navigation
+    name: string;
+    icon: JSX.Element;
+    path: string; // Add the path property for navigation
 }
 
 export interface ProfileItem {
-  image: string;
-  title: string;
-  subtext: string;
+    image: string;
+    title: string;
+    subtext: string;
 }
 
 export interface SettingsItem {
-  title: string;
-  subtitle: string;
-  onClick?: () => void;
+    title: string;
+    subtitle: string;
+    onClick?: () => void;
 }
