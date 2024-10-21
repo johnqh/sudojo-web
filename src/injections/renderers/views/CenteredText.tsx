@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
 
 const CenteredText: React.FC<{ renderable?: Renderable | null }> = ({

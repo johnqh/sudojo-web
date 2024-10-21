@@ -1,6 +1,6 @@
 import React from 'react';
-import { UIDevice } from '../utils/UIDevice';
-import { Renderable } from '../../types/protocols';
+import { UIDevice } from '../../utils/UIDevice';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
 
 const JustText: React.FC<{ renderable?: Renderable | null }> = ({

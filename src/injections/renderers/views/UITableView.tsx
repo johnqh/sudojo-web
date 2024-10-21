@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem } from '@mui/material';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
 import UITableViewSection from './UITableViewSection';
 import Renderer from './Renderer';

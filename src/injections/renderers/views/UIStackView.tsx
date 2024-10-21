@@ -1,5 +1,5 @@
 import React from 'react';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Renderer from './Renderer';
 
 const UIStackView: React.FC<{ renderable?: Renderable | null }> = ({

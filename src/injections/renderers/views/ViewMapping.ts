@@ -1,4 +1,4 @@
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Action from './Action';
 import CenteredText from './CenteredText';
 import ImageAndText from './ImageAndText';
@@ -10,8 +10,8 @@ import UITableView from './UITableView';
 import Waiting from './Waiting';
 import Web from './Web';
 
-export class RendererMapping {
-    static shared?: RendererMapping;
+export default class ViewMapping {
+    static shared?: ViewMapping;
 
     static defaultMap: {
         [key: string]: React.FC<{ renderable?: Renderable | null }>;
@@ -34,10 +34,10 @@ export class RendererMapping {
 
     static defaultAnd(more: {
         [key: string]: React.FC<{ renderable?: Renderable | null }>;
-    }): RendererMapping {
+    }): ViewMapping {
         let defaultMapping = this.defaultMap;
         let modified = { ...defaultMapping, ...more };
-        return new RendererMapping(modified);
+        return new ViewMapping(modified);
     }
 
     public readonly mapping: {

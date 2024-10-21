@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { UIDevice } from '../utils/UIDevice';
-import { Renderable } from '../../types/protocols';
+import { UIDevice } from '../../utils/UIDevice';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
-import { ImageHelper } from '../utils/ImageHelper';
+import { ImageHelper } from '../../utils/ImageHelper';
 
 const ImageAndText: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,

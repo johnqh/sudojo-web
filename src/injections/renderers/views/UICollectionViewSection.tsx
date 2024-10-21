@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionHeader from './SectionHeader'; // Assuming you have the SectionHeader component
-import JustText from './JustText'; // Assuming you have the TitleRow component
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
+import Renderer from './Renderer';
 
 const UICollectionViewSection: React.FC<{
     renderable?: Renderable | null;

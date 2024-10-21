@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
 
 // Utility function to get color from string or default

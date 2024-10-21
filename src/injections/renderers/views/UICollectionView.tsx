@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 import Sudojo from 'Sudojo';
 import UICollectionViewSection from './UICollectionViewSection';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Renderer from './Renderer';
 
 const UICollectionView: React.FC<{

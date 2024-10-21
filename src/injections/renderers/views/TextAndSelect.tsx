@@ -7,9 +7,9 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
-import { UIDevice } from '../utils/UIDevice';
+import { UIDevice } from '../../utils/UIDevice';
 
 const TextAndSelect: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,

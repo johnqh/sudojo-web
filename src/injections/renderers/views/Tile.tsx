@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
-import { ImageHelper } from '../utils/ImageHelper';
+import { ImageHelper } from '../../utils/ImageHelper';
 
 const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
     const handleClick = () => {

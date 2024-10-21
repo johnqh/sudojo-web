@@ -6,7 +6,7 @@ import DrawerComponent from './components/DrawerComponent';
 import MainView from './components/MainView';
 import GeneralSettings from './components/GeneralSettings'; // Import GeneralSettings component
 import Footer from './components/Footer'; // Import Footer
-import { RendererMapping } from './injections/renderers/RendererMapping';
+import ViewMapping from './injections/renderers/views/ViewMapping';
 import { ProfileItem, MenuItem, SettingsItem } from './types';
 
 // Import Material UI icons
@@ -14,46 +14,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
-import Action from './injections/renderers/Action';
-import CenteredText from './injections/renderers/CenteredText';
-import ImageAndText from './injections/renderers/ImageAndText';
 
-RendererMapping.shared = new RendererMapping({
-    action: Action,
-    center: CenteredText,
-    center_image: ImageAndText,
-});
+ViewMapping.shared = ViewMapping.defaultAnd(
+  {
 
-/*
-"action_negative": "action_negative",
-    "action_primary": "action_primary",
-    "action_secondary": "action_secondary",
-    "button": "button",
-    "center": "center",
-    "center_image": "center_image",
-    "grid_sectioned": "grid",
-    "grid_simple": "grid",
-    "hint_text": "hint_text",
-    "hint_actions": "hint_actions",
-    "image": "image",
-    "list_sectioned": "list",
-    "list_simple": "list",
-    "pencil": "pencil",
-    "select": "select",
-    "spacer_vertical": "spacer_vertical",
-    "spacer_horizontal": "spacer_horizontal",
-    "stacked_vertical": "stacked_vertical",
-    "stacked_horizontal": "stacked_horizontal",
-    "sudoku_actions": "sudoku_actions",
-    "sudoku_grid": "sudoku_view",
-    "sudoku_input": "sudoku_input",
-    "text": "text",
-    "tile": "tile",
-    "toggle": "toggle",
-    "waiting": "waiting",
-    "web": "web"
-*/
-// 404 Not Found Component
+  }
+);
+
 const NotFound: React.FC = () => {
     return (
         <Box sx={{ textAlign: 'center', marginTop: '20px' }}>

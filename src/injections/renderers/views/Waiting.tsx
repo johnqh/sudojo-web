@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularProgress, Box } from '@mui/material';
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 
 const Waiting: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,

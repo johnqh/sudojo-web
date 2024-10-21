@@ -1,6 +1,6 @@
 import React from 'react';
 import SectionHeader from './SectionHeader'; // Assuming you have the SectionHeader component
-import { Renderable } from '../../types/protocols';
+import { Renderable } from '../../../types/protocols';
 import { ListItem } from '@mui/material';
 import Renderer from './Renderer';
 

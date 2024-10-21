@@ -1,6 +1,6 @@
 import React from 'react';
-import { Renderable } from '../../types/protocols';
-import { RendererMapping } from './RendererMapping';
+import { Renderable } from '../../../types/protocols';
+import RendererMapping from './ViewMapping';
 
 const Renderer: React.FC<{ renderable?: Renderable | null }> = ({
   renderable,
