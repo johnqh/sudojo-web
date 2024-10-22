@@ -9,6 +9,7 @@ import UINavigationController from './UINavigationController';
 const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
 }) => {
+    console.log('UITabBarController: ' + renderable);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {

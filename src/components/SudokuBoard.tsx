@@ -189,7 +189,7 @@ const SudokuBoard: React.FC = () => {
                 }
                 // Draw pink border for the selected cell
                 if (isSelected) {
-                    ctx.strokeStyle = 'pink';
+                    ctx.strokeStyle = 'orange';
                     ctx.lineWidth = 2;
                     ctx.strokeRect(x, y, cellSize, cellSize);
                 }

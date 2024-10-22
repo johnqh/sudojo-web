@@ -1,14 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import ViewController from './ViewController';
+import Sudojo, { Nullable } from 'Sudojo';
+import { Renderable } from '../../../types/protocols';
+import WebSudokuAppState from '../../../state/WebSudokuAppState';
 
 const UIWindow: React.FC<{  }> = ({
 }) => {
-    const [renderable, _] = useState(null);
+    const [currentId, setCurrentId] = useState<Nullable<string>>(null);
+    const [renderable, setRenderable] = useState<Nullable<Renderable>>(null);
+    useEffect(() => {
+        const _setCurrentId = (param: Nullable<string>) => {
+            setCurrentId(param);
+        };
+        const _setRenderable = (param: Nullable<Renderable>) => {
+            setRenderable(param);
+        };
+        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance =
+            new WebSudokuAppState(_setCurrentId, _setRenderable);
+        return () => {};
+    }, []);
+
+    console.log("UIWindow: " + renderable)
+
+    // Define styles using React.CSSProperties
+    const containerStyle: React.CSSProperties = {
+        backgroundColor: 'black',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        padding: '10px', // Optional padding for spacing
+    };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        <Box style={containerStyle}>
             <ViewController renderable={renderable} />
         </Box>
     );
 };
+
+export default UIWindow;

@@ -6,7 +6,10 @@ import { UIDevice } from '../../utils/UIDevice';
 const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
 }) => {
-    const items = [renderable];
+    const items = renderable?.breadcrumbs();
+    if (!items) {
+        return null
+    }
 
     const handleClick = (renderable?: Renderable | null) => {
         Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(

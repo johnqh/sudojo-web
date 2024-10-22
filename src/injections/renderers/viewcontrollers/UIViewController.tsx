@@ -3,8 +3,10 @@ import { Renderable } from '../../../types/protocols';
 import Renderer from '../views/Renderer';
 
 const UIViewController: React.FC<{ renderable?: Renderable | null }> = ({
-  renderable,
+    renderable,
 }) => {
+    console.log('UIViewController: ' + renderable);
+
     return <Renderer renderable={renderable} />;
 };
 

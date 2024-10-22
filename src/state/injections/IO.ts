@@ -70,7 +70,7 @@ class IO implements NativeIOProtocol {
             p2: Nullable<string>
         ) => void
     ): void {
-        // throw new Error("Method not implemented.");
+        callback(200, null, null)
     }
 
     invoke(
@@ -83,7 +83,7 @@ class IO implements NativeIOProtocol {
             p2: Nullable<string>
         ) => void
     ): void {
-        // throw new Error("Method not implemented.");
+        callback(200, null, null)
     }
 }
 

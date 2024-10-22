@@ -1,10 +1,12 @@
 import React from 'react';
 import { Renderable } from '../../../types/protocols';
 import NavigationBreadcrumbs from '../views/NavigationBreadcrumbs';
+import ViewController from './ViewController';
 
 const UINavigationController: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
 }) => {
+    console.log('UINavigationController: ' + renderable);
     // Define styles using React.CSSProperties
     const containerStyle: React.CSSProperties = {
         display: 'flex',
@@ -17,7 +19,7 @@ const UINavigationController: React.FC<{ renderable?: Renderable | null }> = ({
     return (
         <div style={containerStyle}>
             <NavigationBreadcrumbs renderable={renderable} />
-            <UINavigationController renderable={renderable} />
+            <ViewController renderable={renderable} />
         </div>
     );
 };

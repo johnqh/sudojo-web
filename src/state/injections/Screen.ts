@@ -1,24 +1,48 @@
 import { Nullable, com } from 'Sudojo';
 import { Renderable, ScreenProtocol } from '../../types/protocols';
-import { useState } from 'react';
 
 class Screen implements ScreenProtocol {
     focused: Nullable<
         (p0: com.sudobility.sudokuschool.viewmodels.Renderable) => void
-    >;
+        >;
+    
+    private _currentId: Nullable<string> = null
+    private _root: Nullable<Renderable> = null
+    private _setCurrentId: Nullable<(currentId: Nullable<string>) => void> = null
+    private _setRoot: Nullable<(renderable: Nullable<Renderable>) => void> = null
+    
+    constructor(
+        setCurrentId: (currentId: Nullable<string>) => void,
+        setRoot: (renderable: Nullable<Renderable>) => void,
+    ) {
+        this._setCurrentId = setCurrentId;
+        this._setRoot = setRoot;
+    }
 
     top(): Nullable<com.sudobility.sudokuschool.viewmodels.Renderable> {
-        const [renderable, _] = useState<Nullable<Renderable>>(null);
-        return renderable
+        return this._root;
+    }
+
+    private currentId(): Nullable<string> {
+        return this._currentId
+    }
+
+    private setCurrentId(currentId: Nullable<string>) {
+        this._currentId = currentId;
+        const _setCurrentId = this._setCurrentId;
+        if (_setCurrentId) {
+            _setCurrentId(currentId);
+        }
     }
 
     current(): Nullable<com.sudobility.sudokuschool.viewmodels.Renderable> {
-        const [current, _] = useState<Nullable<string>>(null);
-        if (!current) {
+        const top = this.top();
+        const currentId = this.currentId()
+        if (currentId) {
+            return top?.findById(currentId)
+        } else {
             return null
         }
-        const [renderable, __] = useState<Nullable<Renderable>>(null);
-        return renderable?.findById(current)
     }
 
     root(
@@ -26,8 +50,11 @@ class Screen implements ScreenProtocol {
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
-        const [_, setRenderable] = useState<Nullable<Renderable>>(null);
-        setRenderable(renderable);
+        this._root = renderable;
+        const _setRoot = this._setRoot;
+        if (_setRoot) {
+            _setRoot(renderable);
+        }
     }
 
     push(
@@ -36,8 +63,7 @@ class Screen implements ScreenProtocol {
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
-        const [_, setCurrent] = useState<Nullable<string>>(null);
-        setCurrent(renderable?.id);
+        this.setCurrentId(renderable?.id);
     }
 
     pop(
@@ -45,8 +71,7 @@ class Screen implements ScreenProtocol {
         parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
         animated?: boolean
     ): void {
-        const [_, setCurrent] = useState<Nullable<string>>(null);
-        setCurrent(renderable?.parent?.id);
+        this.setCurrentId(renderable?.parent?.id);
     }
 
     prompt(
@@ -55,8 +80,7 @@ class Screen implements ScreenProtocol {
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
-        const [_, setCurrent] = useState<Nullable<string>>(null);
-        setCurrent(renderable?.id);
+        this.setCurrentId(renderable?.id);
     }
 
     dismiss(
@@ -64,8 +88,7 @@ class Screen implements ScreenProtocol {
         parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
         animated?: boolean
     ): void {
-        const [_, setCurrent] = useState<Nullable<string>>(null);
-        setCurrent(renderable?.parent?.id);
+        this.setCurrentId(renderable?.parent?.id);
     }
 
     message(

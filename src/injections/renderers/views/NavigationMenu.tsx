@@ -22,7 +22,7 @@ const NavigationMenu: React.FC<{
         <div style={containerStyle}>
             <List>
                 {children.map((child) => (
-                    <ListItem>
+                    <ListItem key = {child.id}>
                         <NavigationMenuItem
                             renderable={child}
                             isSelected={child.route == renderable.route}
