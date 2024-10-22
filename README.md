@@ -44,3 +44,25 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Using your local Sudojo repo
+
+Whenever you have changes in Sudojo that you'd like to test in your local sudojo-web branch, use the following command:
+
+```
+npm run install-local-sudojo --clean
+```
+
+The `--clean` option will do some extra cleaning, **it is not needed on subsequent runs.**
+
+## Reverting to remote Sudojo
+
+Revert any changes to Sudojo in package.json and pnpm-lock.yaml. If you haven't made any other package changes, you can use:
+
+```
+git restore main package.json
+git restore main package-lock.yaml
+```
+
+Then run `pnpm install`

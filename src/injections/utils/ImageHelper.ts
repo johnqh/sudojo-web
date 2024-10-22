@@ -9,6 +9,6 @@ export class ImageHelper {
         }
 
         // If not, assume the image is in the /public directory
-        return `${process.env.PUBLIC_URL}/${image}`;
+        return `${process.env.PUBLIC_URL}/${image}.svg`;
     }
 }

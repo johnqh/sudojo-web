@@ -2,6 +2,8 @@ import React from 'react';
 import { Renderable } from '../../../types/protocols';
 import Sudojo from 'Sudojo';
 import { UIDevice } from '../../utils/UIDevice';
+import UIColor from '../utils/UIColor';
+import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
 
 const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
@@ -16,47 +18,40 @@ const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
             renderable
         );
     };
+
     const containerStyle: React.CSSProperties = {
         height: UIDevice.isIOSOrIPad() ? '44px' : '48px',
         display: 'flex',
         alignItems: 'center',
-        padding: '0 10px',
-        backgroundColor: '#f0f0f0',
+        padding: '0px',
+        backgroundColor: UIColor(false).systemBackground,
         width: '100%',
+        margin: '0', // No margin on top, left, or right
+        justifyContent: 'start', // Align breadcrumbs to the left
     };
 
     return (
-        <div style={containerStyle}>
-            <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    {items.map((item, index) => (
-                        <li
-                            key={index}
-                            className={`breadcrumb-item ${
-                                index === items.length - 1 ? 'active' : ''
-                            }`}
-                            aria-current={
-                                index === items.length - 1 ? 'page' : undefined
-                            }
-                        >
-                            {index === items.length - 1 ? (
-                                item?.display?.labels?.title?.text
-                            ) : (
-                                <a
-                                    href="#!"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleClick(item);
-                                    }}
-                                >
-                                    {item?.display?.labels?.title?.text}
-                                </a>
-                            )}
-                        </li>
-                    ))}
-                </ol>
-            </nav>
-        </div>
+        <Box style={containerStyle}>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ margin: '0', padding: '0' }}>
+            {items.map((item, index) => (
+                index < items.length - 1 ? (
+                    <Link
+                        key={index}
+                        color="inherit"
+                        onClick={() => handleClick(item)}
+                        style={{ cursor: 'pointer' }} // Add cursor pointer for links
+                    >
+                        {item.display?.labels?.text?.text}
+                    </Link>
+                ) : (
+                    // The last item is usually not clickable, so use Typography
+                    <Typography key={index} color="textPrimary">
+                        {item.display?.labels?.title?.text}
+                    </Typography>
+                )
+            ))}
+            </Breadcrumbs>
+        </Box>
     );
 };
 

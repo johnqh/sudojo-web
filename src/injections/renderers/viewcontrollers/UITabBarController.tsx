@@ -5,6 +5,7 @@ import AppBarComponent from '../../../components/AppBarComponent';
 import Footer from '../../../components/Footer';
 import TabBar from '../views/TabBar';
 import UINavigationController from './UINavigationController';
+import TopBar from '../views/TopBar';
 
 const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
@@ -32,7 +33,7 @@ const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
             >
                 <Toolbar>
-                    <AppBarComponent handleDrawerToggle={handleDrawerToggle} />
+                    <TopBar renderable = {renderable} handleDrawerToggle={handleDrawerToggle} />
                 </Toolbar>
             </AppBar>
 
@@ -53,6 +54,7 @@ const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
                     marginLeft: { sm: `${drawerWidth}px` },
                     marginTop: '64px', // Offset for AppBar
                     overflowY: 'auto', // Ensure scrolling if needed
+                    padding:'0'
                 }}
             >
                 <UINavigationController renderable={selected}/>

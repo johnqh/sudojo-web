@@ -2,6 +2,7 @@ import React from 'react';
 import { Renderable } from '../../../types/protocols';
 import NavigationBreadcrumbs from '../views/NavigationBreadcrumbs';
 import ViewController from './ViewController';
+import UIColor from '../utils/UIColor';
 
 const UINavigationController: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
@@ -12,8 +13,8 @@ const UINavigationController: React.FC<{ renderable?: Renderable | null }> = ({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        height: '100vh', // Full vertical height
-        boxSizing: 'border-box',
+        height: '100%', // Full vertical height
+        backgroundColor: UIColor(false).systemPink,
     };
 
     return (

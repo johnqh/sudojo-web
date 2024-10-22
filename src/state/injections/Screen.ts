@@ -2,6 +2,8 @@ import { Nullable, com } from 'Sudojo';
 import { Renderable, ScreenProtocol } from '../../types/protocols';
 
 class Screen implements ScreenProtocol {
+    static shared?: Nullable<Screen> = null
+    
     focused: Nullable<
         (p0: com.sudobility.sudokuschool.viewmodels.Renderable) => void
         >;
@@ -17,6 +19,7 @@ class Screen implements ScreenProtocol {
     ) {
         this._setCurrentId = setCurrentId;
         this._setRoot = setRoot;
+        Screen.shared = this
     }
 
     top(): Nullable<com.sudobility.sudokuschool.viewmodels.Renderable> {

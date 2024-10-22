@@ -4,6 +4,7 @@ import ViewController from './ViewController';
 import Sudojo, { Nullable } from 'Sudojo';
 import { Renderable } from '../../../types/protocols';
 import WebSudokuAppState from '../../../state/WebSudokuAppState';
+import Footer from '../../../components/Footer';
 
 const UIWindow: React.FC<{  }> = ({
 }) => {
@@ -28,8 +29,7 @@ const UIWindow: React.FC<{  }> = ({
         backgroundColor: 'black',
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
-        padding: '10px', // Optional padding for spacing
+        height: '100%',
     };
 
     return (
