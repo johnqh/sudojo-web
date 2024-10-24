@@ -66,7 +66,7 @@ class Screen implements ScreenProtocol {
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
-        this.setCurrentId(renderable?.id);
+        this.goto(renderable)
     }
 
     pop(
@@ -74,7 +74,7 @@ class Screen implements ScreenProtocol {
         parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
         animated?: boolean
     ): void {
-        this.setCurrentId(renderable?.parent?.id);
+        this.goto(parent)
     }
 
     prompt(
@@ -83,7 +83,7 @@ class Screen implements ScreenProtocol {
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
-        this.setCurrentId(renderable?.id);
+        this.goto(renderable)
     }
 
     dismiss(
@@ -91,7 +91,15 @@ class Screen implements ScreenProtocol {
         parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
         animated?: boolean
     ): void {
-        this.setCurrentId(renderable?.parent?.id);
+        this.goto(parent)
+    }
+
+    private goto(renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>) {
+        this.setCurrentId(renderable?.id);
+        const focused = this.focused;
+        if (focused && renderable) {
+            focused(renderable)
+        }
     }
 
     message(
@@ -121,7 +129,7 @@ class Screen implements ScreenProtocol {
         renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
         animated?: boolean
     ): void {
-        throw new Error('Method not implemented.');
+        this.root(renderable)
     }
 }
 

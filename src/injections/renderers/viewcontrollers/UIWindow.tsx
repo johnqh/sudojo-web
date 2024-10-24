@@ -5,6 +5,7 @@ import Sudojo, { Nullable } from 'Sudojo';
 import { Renderable } from '../../../types/protocols';
 import WebSudokuAppState from '../../../state/WebSudokuAppState';
 import Footer from '../../../components/Footer';
+import UIColor from '../utils/UIColor';
 
 const UIWindow: React.FC<{  }> = ({
 }) => {
@@ -26,7 +27,7 @@ const UIWindow: React.FC<{  }> = ({
 
     // Define styles using React.CSSProperties
     const containerStyle: React.CSSProperties = {
-        backgroundColor: 'black',
+        backgroundColor: UIColor(false).systemBackground,
         display: 'flex',
         flexDirection: 'column',
         height: '100%',

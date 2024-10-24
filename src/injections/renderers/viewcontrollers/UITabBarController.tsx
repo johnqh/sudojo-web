@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import { Renderable } from '../../../types/protocols';
-import AppBarComponent from '../../../components/AppBarComponent';
 import Footer from '../../../components/Footer';
 import TabBar from '../views/TabBar';
 import UINavigationController from './UINavigationController';
 import TopBar from '../views/TopBar';
+import Screen from '../../../state/injections/Screen';
 
 const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
@@ -21,7 +21,9 @@ const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
     if (!children) {
         return null
     }
-    const selected = children.find(item => item.route === renderable.route) ?? children[0];
+    const current = Screen.shared?.current()
+    const breadcrumbs = current?.breadcrumbs();
+    const selected = breadcrumbs?.[1] ?? children[0]
 
     const drawerWidth = 240;
 

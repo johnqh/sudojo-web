@@ -1,29 +1,36 @@
-import React from 'react';
-import { Renderable } from '../../../types/protocols';
-import Renderer from '../views/Renderer';
-import RendererMapping from '../views/ViewMapping';
-import Screen from '../../../state/injections/Screen';
+import React from "react";
+import { Renderable } from "../../../types/protocols";
+import Renderer from "../views/Renderer";
+import RendererMapping from "../views/ViewMapping";
+import Screen from "../../../state/injections/Screen";
+import UIColor from "../utils/UIColor";
+import { Box } from "@mui/material";
 
 const UIViewController: React.FC<{ renderable?: Renderable | null }> = ({
-    renderable,
+	renderable,
 }) => {
-    console.log('UIViewController: ' + renderable);
+	console.log("UIViewController: " + renderable);
 
-    // Get the component based on the type
-    const Component = RendererMapping.shared?.get(renderable?.display?.presentation?.asScreen?.view?.layout);
+	const containerStyle: React.CSSProperties = {
+		display: "flex",
+		flexDirection: "column",
+		width: "100%",
+		height: "100%",
+		backgroundColor: UIColor(false).systemBackground,
+	};
 
-    // If the component doesn't exist in the mapping, render nothing
-    if (!Component) {
-        return null;
-    }
-    
-    const focused = Screen.shared?.focused
-    if (focused && renderable) {
-        focused(renderable)
-    }
+	const Component = RendererMapping.shared?.get(
+		renderable?.display?.presentation?.asScreen?.view?.layout
+	);
 
-    // Render the component with the text prop
-    return <Component renderable={renderable} />;
+	if (!Component) {
+		return null;
+	}
+	return (
+		<Box style={containerStyle}>
+			<Component renderable={renderable} />
+		</Box>
+	);
 };
 
 export default UIViewController;

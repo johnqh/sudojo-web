@@ -21,6 +21,7 @@ export default {
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:import/typescript',
+        'prettier',
     ],
     rules: {
         'react/prop-types': 'off', // Disable prop-types since we use TypeScript

@@ -24,7 +24,6 @@ const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
         display: 'flex',
         alignItems: 'center',
         padding: '0px',
-        backgroundColor: UIColor(false).systemBackground,
         width: '100%',
         margin: '0', // No margin on top, left, or right
         justifyContent: 'start', // Align breadcrumbs to the left
