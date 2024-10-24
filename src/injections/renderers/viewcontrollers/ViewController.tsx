@@ -1,9 +1,11 @@
 import React from 'react';
 import { Renderable } from '../../../types/protocols';
 import ViewControllerMapping from './ViewControllerMapping';
+import { Nullable } from 'Sudojo';
 
-const ViewController: React.FC<{ renderable?: Renderable | null }> = ({
+const ViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
   renderable,
+  currentId,
 }) => {
     console.log("ViewController: " + renderable)
     
@@ -20,7 +22,7 @@ const ViewController: React.FC<{ renderable?: Renderable | null }> = ({
         return null;
     }
 
-    return <Component renderable={renderable} />;
+    return <Component renderable={renderable} currentId={currentId} />;
 };
 
 export default ViewController;

@@ -6,9 +6,11 @@ import TabBar from '../views/TabBar';
 import UINavigationController from './UINavigationController';
 import TopBar from '../views/TopBar';
 import Screen from '../../../state/injections/Screen';
+import { Nullable } from 'Sudojo';
 
-const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
+const UITabBarController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
     renderable,
+    currentId,
 }) => {
     console.log('UITabBarController: ' + renderable);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,7 +23,7 @@ const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
     if (!children) {
         return null
     }
-    const current = Screen.shared?.current()
+    const current = renderable?.findById(currentId ?? "/")
     const breadcrumbs = current?.breadcrumbs();
     const selected = breadcrumbs?.[1] ?? children[0]
 
@@ -59,7 +61,7 @@ const UITabBarController: React.FC<{ renderable?: Renderable | null }> = ({
                     padding:'0'
                 }}
             >
-                <UINavigationController renderable={selected}/>
+                <UINavigationController renderable={selected} currentId={currentId}/>
             </Box>
 
             {/* Footer - positioned below the main content and drawer */}

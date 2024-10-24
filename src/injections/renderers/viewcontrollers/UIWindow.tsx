@@ -35,7 +35,7 @@ const UIWindow: React.FC<{  }> = ({
 
     return (
         <Box style={containerStyle}>
-            <ViewController renderable={renderable} />
+            <ViewController renderable={renderable} currentId={currentId} />
         </Box>
     );
 };

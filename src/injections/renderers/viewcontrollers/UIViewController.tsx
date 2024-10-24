@@ -1,12 +1,11 @@
 import React from "react";
 import { Renderable } from "../../../types/protocols";
-import Renderer from "../views/Renderer";
 import RendererMapping from "../views/ViewMapping";
-import Screen from "../../../state/injections/Screen";
 import UIColor from "../utils/UIColor";
 import { Box } from "@mui/material";
+import { Nullable } from "Sudojo";
 
-const UIViewController: React.FC<{ renderable?: Renderable | null }> = ({
+const UIViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
 	renderable,
 }) => {
 	console.log("UIViewController: " + renderable);

@@ -9,7 +9,7 @@ const WebView: React.FC<{ renderable?: Renderable | null }> = ({
 
     return (
         <iframe
-            src={renderable?.display?.url}
+            src={renderable?.display?.url?.replace("file:///", "/")}
             title="Web View"
             style={{
                 width: '100%',
