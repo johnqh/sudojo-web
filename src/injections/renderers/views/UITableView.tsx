@@ -2,7 +2,6 @@ import React from "react";
 import { Box, List, ListItem } from "@mui/material";
 import { Renderable } from "../../../types/protocols";
 import Sudojo from "Sudojo";
-import UITableViewSection from "./UITableViewSection";
 import Renderer from "./Renderer";
 import { UIDevice } from "../../utils/UIDevice";
 import UIColor from "../utils/UIColor";
@@ -31,20 +30,15 @@ const UITableView: React.FC<{ renderable?: Renderable | null }> = ({
 		Sudojo.com.sudobility.sudokuschool.viewmodels.Layout.Companion
 			.LIST_SECTIONED;
 
-	return sectioned ? (
-			<List style={containerStyle}>
-				{children.map((child, index) => (
-					<UITableViewSection key={child.id} renderable={child} />
-				))}
-			</List>
-	) : (
-			<List>
-				{children.map((child, index) => (
-					<ListItem key={child.id}>
-						<Renderer renderable={child} /> {}
-					</ListItem>
-				))}
-			</List>
+	const list = sectioned ? Sudojo.com.sudobility.sudokuschool.viewmodels.Renderable.Companion.flatten(children) : children;
+	return (
+		<List>
+			{list.map((child, index) => (
+				<ListItem key={child.id}>
+					<Renderer renderable={child} /> {}
+				</ListItem>
+			))}
+		</List>
 	);
 };
 
