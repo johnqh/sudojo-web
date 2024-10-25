@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
 import { ImageHelper } from '../../utils/ImageHelper';
+import * as Sudojo from 'renderable';
 
 const JustImage: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
 }) => {
     const handleClick = () => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

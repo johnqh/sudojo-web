@@ -3,7 +3,7 @@ import { Renderable } from "../../../types/protocols";
 import RendererMapping from "../views/ViewMapping";
 import UIColor from "../utils/UIColor";
 import { Box } from "@mui/material";
-import { Nullable } from "Sudojo";
+import { Nullable } from "renderable";
 
 const UIViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
 	renderable,

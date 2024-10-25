@@ -1,7 +1,7 @@
 import React from 'react';
 import { UIDevice } from '../../utils/UIDevice';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 import JustImage from './JustImage';
 
 const NavigationMenuItem: React.FC<{
@@ -9,7 +9,7 @@ const NavigationMenuItem: React.FC<{
     isSelected?: boolean;
 }> = ({ renderable, isSelected }) => {
     const handleClick = () => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

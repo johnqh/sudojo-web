@@ -1,4 +1,4 @@
-import { Nullable } from 'Sudojo';
+import { Nullable } from 'renderable';
 import { LoginProtocol } from '../../types/protocols';
 
 class Login implements LoginProtocol {

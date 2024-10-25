@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 import { ImageHelper } from '../../utils/ImageHelper';
 
 const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
     const handleClick = () => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

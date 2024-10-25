@@ -1,7 +1,7 @@
 import React from 'react';
 import { Renderable } from '../../../types/protocols';
 import ViewControllerMapping from './ViewControllerMapping';
-import { Nullable } from 'Sudojo';
+import { Nullable } from 'renderable';
 
 const ViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
   renderable,

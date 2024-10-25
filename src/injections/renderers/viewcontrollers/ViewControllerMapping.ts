@@ -1,4 +1,4 @@
-import { Nullable } from 'Sudojo';
+import { Nullable } from 'renderable';
 import { Renderable } from '../../../types/protocols';
 import UITabBarController from './UITabBarController';
 import UIViewController from './UIViewController';

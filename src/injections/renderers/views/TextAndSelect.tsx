@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 import { UIDevice } from '../../utils/UIDevice';
 
 const TextAndSelect: React.FC<{ renderable?: Renderable | null }> = ({

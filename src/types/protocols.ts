@@ -1,20 +1,20 @@
-import Sudojo from 'Sudojo';
+import * as Sudojo from "renderable";
 
 export type NativeIOProtocol = Omit<
-    Sudojo.com.sudobility.sudokuschool.interactors.common.NativeIOProtocol,
-    '__doNotUseOrImplementIt'
+	Sudojo.com.sudobility.renderable.renderable.protocols.NativeIOProtocol,
+	"__doNotUseOrImplementIt"
 >;
 export type LoginProtocol = Omit<
-    Sudojo.com.sudobility.sudokuschool.interactors.common.LoginProtocol,
-    '__doNotUseOrImplementIt'
+	Sudojo.com.sudobility.renderable.renderable.protocols.LoginProtocol,
+	"__doNotUseOrImplementIt"
 >;
-export type ScreenProtocol = Omit<
-    Sudojo.com.sudobility.sudokuschool.protocols.ScreenProtocol,
-    '__doNotUseOrImplementIt'
+export type DisplayProtocol = Omit<
+	Sudojo.com.sudobility.renderable.renderable.protocols.DisplayProtocol,
+	"__doNotUseOrImplementIt"
 >;
 
-export type AppState = Sudojo.com.sudobility.sudokuschool.statemanager.AppState;
+export type AppState =
+	Sudojo.com.sudobility.renderable.renderable.state.AppState;
 export type SudokuAppState =
-    Sudojo.com.sudobility.sudokuschool.statemanager.SudokuAppState;
-export type Renderable =
-    Sudojo.com.sudobility.sudokuschool.viewmodels.Renderable;
+	Sudojo.com.sudobility.renderable.sudokuschool.statemanager.SudokuAppState;
+export type Renderable = Sudojo.com.sudobility.renderable.renderable.Renderable;

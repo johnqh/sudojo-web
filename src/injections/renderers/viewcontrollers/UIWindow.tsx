@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import ViewController from './ViewController';
-import Sudojo, { Nullable } from 'Sudojo';
+import  { Nullable } from 'renderable';
+import * as Sudojo from 'renderable';
 import { Renderable } from '../../../types/protocols';
 import WebSudokuAppState from '../../../state/WebSudokuAppState';
-import Footer from '../../../components/Footer';
 import UIColor from '../utils/UIColor';
 
 const UIWindow: React.FC<{  }> = ({
@@ -18,7 +18,7 @@ const UIWindow: React.FC<{  }> = ({
         const _setRenderable = (param: Nullable<Renderable>) => {
             setRenderable(param);
         };
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance =
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance =
             new WebSudokuAppState(_setCurrentId, _setRenderable);
         return () => {};
     }, []);

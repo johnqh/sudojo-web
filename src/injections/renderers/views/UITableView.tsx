@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, List, ListItem } from "@mui/material";
 import { Renderable } from "../../../types/protocols";
-import Sudojo from "Sudojo";
+import * as Sudojo from "renderable";
 import Renderer from "./Renderer";
 import { UIDevice } from "../../utils/UIDevice";
 import UIColor from "../utils/UIColor";
@@ -27,10 +27,14 @@ const UITableView: React.FC<{ renderable?: Renderable | null }> = ({
 
 	const sectioned =
 		renderable?.display?.presentation?.asScreen?.view?.layout ==
-		Sudojo.com.sudobility.sudokuschool.viewmodels.Layout.Companion
+		Sudojo.com.sudobility.renderable.renderable.Layout.Companion
 			.LIST_SECTIONED;
 
-	const list = sectioned ? Sudojo.com.sudobility.sudokuschool.viewmodels.Renderable.Companion.flatten(children) : children;
+	const list = sectioned
+		? Sudojo.com.sudobility.renderable.renderable.Renderable.Companion.flatten(
+				children
+		  )
+		: children;
 	return (
 		<List>
 			{list.map((child, index) => (

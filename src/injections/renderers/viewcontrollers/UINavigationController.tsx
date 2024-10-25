@@ -3,7 +3,7 @@ import { Renderable } from '../../../types/protocols';
 import NavigationBreadcrumbs from '../views/NavigationBreadcrumbs';
 import ViewController from './ViewController';
 import UIColor from '../utils/UIColor';
-import { Nullable } from 'Sudojo';
+import { Nullable } from 'renderable';
 
 const UINavigationController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
     renderable,

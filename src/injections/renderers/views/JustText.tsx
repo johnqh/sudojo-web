@@ -1,13 +1,13 @@
 import React from 'react';
 import { UIDevice } from '../../utils/UIDevice';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 
 const JustText: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
 }) => {
     const handleClick = () => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

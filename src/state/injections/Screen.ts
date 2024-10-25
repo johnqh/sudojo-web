@@ -1,11 +1,12 @@
-import { Nullable, com } from 'Sudojo';
-import { Renderable, ScreenProtocol } from '../../types/protocols';
+import * as Sudojo  from 'renderable';
+import { Nullable } from 'renderable';
+import { Renderable, DisplayProtocol } from '../../types/protocols';
 
-class Screen implements ScreenProtocol {
+class Screen implements DisplayProtocol {
     static shared?: Nullable<Screen> = null
     
     focused: Nullable<
-        (p0: com.sudobility.sudokuschool.viewmodels.Renderable) => void
+        (p0: Sudojo.com.sudobility.renderable.renderable.Renderable) => void
         >;
     
     private _currentId: Nullable<string> = null
@@ -22,7 +23,7 @@ class Screen implements ScreenProtocol {
         Screen.shared = this
     }
 
-    top(): Nullable<com.sudobility.sudokuschool.viewmodels.Renderable> {
+    top(): Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable> {
         return this._root;
     }
 
@@ -38,7 +39,7 @@ class Screen implements ScreenProtocol {
         }
     }
 
-    current(): Nullable<com.sudobility.sudokuschool.viewmodels.Renderable> {
+    current(): Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable> {
         const top = this.top();
         const currentId = this.currentId()
         if (currentId) {
@@ -49,7 +50,7 @@ class Screen implements ScreenProtocol {
     }
 
     root(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -61,8 +62,8 @@ class Screen implements ScreenProtocol {
     }
 
     push(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
-        parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -70,16 +71,16 @@ class Screen implements ScreenProtocol {
     }
 
     pop(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
-        parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean
     ): void {
         this.goto(parent)
     }
 
     prompt(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
-        parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -87,14 +88,14 @@ class Screen implements ScreenProtocol {
     }
 
     dismiss(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
-        parent: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean
     ): void {
         this.goto(parent)
     }
 
-    private goto(renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>) {
+    private goto(renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>) {
         this.setCurrentId(renderable?.id);
         const focused = this.focused;
         if (focused && renderable) {
@@ -103,30 +104,30 @@ class Screen implements ScreenProtocol {
     }
 
     message(
-        message: com.sudobility.sudokuschool.protocols.ScreenMessage,
+        message: Sudojo.com.sudobility.renderable.renderable.protocols.ScreenMessage,
         blocking?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
         throw new Error('Method not implemented.');
     }
-    toast(message: com.sudobility.sudokuschool.protocols.ScreenMessage): void {
+    toast(message: Sudojo.com.sudobility.renderable.renderable.protocols.ScreenMessage): void {
         throw new Error('Method not implemented.');
     }
     confirm(
-        message: com.sudobility.sudokuschool.protocols.ScreenMessage,
+        message: Sudojo.com.sudobility.renderable.renderable.protocols.ScreenMessage,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
         throw new Error('Method not implemented.');
     }
     choose(
-        message: com.sudobility.sudokuschool.protocols.ScreenMessage,
-        params: com.sudobility.sudokuschool.utils.Params,
+        message: Sudojo.com.sudobility.renderable.renderable.protocols.ScreenMessage,
+        params: Sudojo.com.sudobility.renderable.renderable.utils.Params,
         completion?: Nullable<(p0: string) => void>
     ): void {
         throw new Error('Method not implemented.');
     }
     update(
-        renderable: Nullable<com.sudobility.sudokuschool.viewmodels.Renderable>,
+        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
         animated?: boolean
     ): void {
         this.root(renderable)

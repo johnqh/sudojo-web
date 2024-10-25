@@ -1,11 +1,12 @@
-import { com, Nullable } from 'Sudojo';
+import * as Sudojo  from 'renderable';
+import { Nullable } from 'renderable';
 import { NativeIOProtocol } from '../../types/protocols';
 
 class IO implements NativeIOProtocol {
     http(
-        verb: com.sudobility.sudokuschool.interactors.common.IOVerb,
+        verb: Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb,
         url: string,
-        headers: Nullable<com.sudobility.sudokuschool.utils.Params>,
+        headers: Nullable<Sudojo.com.sudobility.renderable.renderable.utils.Params>,
         body: Nullable<string>,
         callback: (
             p0: number,
@@ -43,7 +44,7 @@ class IO implements NativeIOProtocol {
     }
 
     httpHeaders(
-        headers: Nullable<com.sudobility.sudokuschool.utils.Params>
+        headers: Nullable<Sudojo.com.sudobility.renderable.renderable.utils.Params>
     ): HeadersInit | undefined {
         if (headers !== null) {
             const obj: Record<string, string> = {};
@@ -61,7 +62,7 @@ class IO implements NativeIOProtocol {
     }
 
     file(
-        verb: com.sudobility.sudokuschool.interactors.common.IOVerb,
+        verb: Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb,
         url: string,
         body: Nullable<string>,
         callback: (
@@ -74,7 +75,7 @@ class IO implements NativeIOProtocol {
     }
 
     invoke(
-        verb: com.sudobility.sudokuschool.interactors.common.IOVerb,
+        verb: Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb,
         url: string,
         body: Nullable<string>,
         callback: (

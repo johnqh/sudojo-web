@@ -5,8 +5,7 @@ import Footer from '../../../components/Footer';
 import TabBar from '../views/TabBar';
 import UINavigationController from './UINavigationController';
 import TopBar from '../views/TopBar';
-import Screen from '../../../state/injections/Screen';
-import { Nullable } from 'Sudojo';
+import { Nullable } from 'renderable';
 
 const UITabBarController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
     renderable,

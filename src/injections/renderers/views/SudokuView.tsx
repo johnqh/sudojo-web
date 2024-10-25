@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 
 // Utility function to get color from string or default
 const getColor = (color?: string, defaultColor: string = '#000000'): string => {
@@ -22,7 +22,7 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
 
     // Function to handle navigation
     const handleNavigate = (renderable: Renderable) => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

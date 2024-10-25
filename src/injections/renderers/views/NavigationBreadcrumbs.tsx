@@ -1,9 +1,8 @@
 import React from 'react';
 import { Renderable } from '../../../types/protocols';
-import Sudojo from 'Sudojo';
 import { UIDevice } from '../../utils/UIDevice';
-import UIColor from '../utils/UIColor';
 import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
+import * as Sudojo from 'renderable';
 
 const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
     renderable,
@@ -14,7 +13,7 @@ const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
     }
 
     const handleClick = (renderable?: Renderable | null) => {
-        Sudojo.com.sudobility.sudokuschool.statemanager.AppState.Companion.instance?.navigate(
+        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
     };

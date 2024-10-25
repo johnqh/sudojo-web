@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import Sudojo from 'Sudojo';
+import * as Sudojo from 'renderable';
 import UICollectionViewSection from './UICollectionViewSection';
 import { Renderable } from '../../../types/protocols';
 import Renderer from './Renderer';
@@ -13,7 +13,7 @@ const UICollectionView: React.FC<{
     const gridSize = Math.floor(12 / columns);
 
     return renderable?.display?.presentation?.asScreen?.view?.layout ==
-        Sudojo.com.sudobility.sudokuschool.viewmodels.Layout.Companion
+        Sudojo.com.sudobility.renderable.renderable.Layout.Companion
             .LIST_SECTIONED ? (
         <Box sx={{ width: '100%' }}>
             {renderable?.children?.map((child, index) => (
