@@ -1,9 +1,10 @@
 import React from 'react';
 import { UIDevice } from '../../utils/UIDevice';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 
-const JustText: React.FC<{ renderable?: Renderable | null }> = ({
+const JustText: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const handleClick = () => {
@@ -23,7 +24,7 @@ const JustText: React.FC<{ renderable?: Renderable | null }> = ({
 
     return (
         <div style={containerStyle} onClick={handleClick}>
-            {renderable?.display?.labels?.title?.text}
+            {renderable?.view?.withTitle()?.text}
         </div>
     );
 };

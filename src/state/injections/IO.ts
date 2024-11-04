@@ -1,8 +1,8 @@
-import * as Sudojo  from 'renderable';
-import { Nullable } from 'renderable';
-import { NativeIOProtocol } from '../../types/protocols';
+import * as Sudojo  from 'Sudojo';
+import { Nullable } from 'Sudojo';
+import { INativeIO } from '../../types/protocols';
 
-class IO implements NativeIOProtocol {
+class IO implements INativeIO {
     http(
         verb: Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb,
         url: string,

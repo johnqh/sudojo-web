@@ -7,11 +7,11 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
 import { UIDevice } from '../../utils/UIDevice';
+import { Nullable } from 'Sudojo';
 
-const TextAndSelect: React.FC<{ renderable?: Renderable | null }> = ({
+const TextAndSelect: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const handleClick = () => {
@@ -30,23 +30,23 @@ const TextAndSelect: React.FC<{ renderable?: Renderable | null }> = ({
         >
             {/* Left Text */}
             <Typography variant="body1" style={{ marginRight: '16px' }}>
-                {renderable?.display?.labels?.title?.text}
+                {renderable?.view?.withTitle()?.text}
             </Typography>
 
             {/* Right Popup Menu */}
             <FormControl variant="outlined">
                 <InputLabel>Select</InputLabel>
                 <Select
-                    value={renderable?.display?.labels?.text?.text}
+                    value={renderable?.view?.withSubtitle()?.text}
                     onChange={handleClick}
                     label="Select"
                 >
-                    {renderable?.children?.map((child, index) => (
+                    {renderable?.view?.withChildren()?.map((child, index) => (
                         <MenuItem
                             key={index}
-                            value={child.display?.labels?.title?.text}
+                            value={child.view?.withTitle()?.text}
                         >
-                            {child.display?.labels?.title?.text}
+                            {child.view?.withTitle()?.text}
                         </MenuItem>
                     ))}
                 </Select>

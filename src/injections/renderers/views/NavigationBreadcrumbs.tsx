@@ -1,10 +1,11 @@
 import React from 'react';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import { UIDevice } from '../../utils/UIDevice';
 import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
-import * as Sudojo from 'renderable';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 
-const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
+const NavigationBreadcrumbs: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const items = renderable?.breadcrumbs();
@@ -12,7 +13,7 @@ const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
         return null
     }
 
-    const handleClick = (renderable?: Renderable | null) => {
+    const handleClick = (renderable?: Nullable<IRenderable>) => {
         Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
@@ -39,12 +40,12 @@ const NavigationBreadcrumbs: React.FC<{ renderable?: Renderable | null }> = ({
                         onClick={() => handleClick(item)}
                         style={{ cursor: 'pointer' }} // Add cursor pointer for links
                     >
-                        {item.display?.labels?.text?.text}
+                        {item.view?.withSubtitle()?.text}
                     </Link>
                 ) : (
                     // The last item is usually not clickable, so use Typography
                     <Typography key={index} color="textPrimary">
-                        {item.display?.labels?.title?.text}
+                        {item.view?.withSubtitle()?.text}
                     </Typography>
                 )
             ))}

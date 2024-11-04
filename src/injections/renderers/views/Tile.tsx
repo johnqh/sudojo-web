@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import * as Sudojo from 'Sudojo';
 import { ImageHelper } from '../../utils/ImageHelper';
+import { Nullable } from 'Sudojo';
 
-const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
+const Tile: React.FC<{ renderable?: Nullable<IRenderable> }> = ({ renderable }) => {
     const handleClick = () => {
         Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
@@ -12,8 +13,8 @@ const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
     };
 
     const imageUrl =
-        renderable?.display?.image?.url ??
-        ImageHelper.localImageUrl(renderable?.display?.image?.local);
+        renderable?.view?.withImage()?.withUrl() ??
+        ImageHelper.localImageUrl(renderable?.view?.withImage()?.withLocal());
 
     return (
         <Box
@@ -44,7 +45,7 @@ const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
                     <Box
                         component="img"
                         src={imageUrl}
-                        alt={renderable?.display?.labels?.title?.text}
+                        alt={renderable?.view?.withTitle()?.text}
                         sx={{
                             width: '100%',
                             height: '100%',
@@ -66,7 +67,7 @@ const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
                     textAlign: 'center',
                 }}
             >
-                {renderable?.display?.labels?.title?.text}
+                {renderable?.view?.withTitle()?.text}
             </Typography>
 
             {/* Text 8px below title */}
@@ -79,7 +80,7 @@ const Tile: React.FC<{ renderable?: Renderable | null }> = ({ renderable }) => {
                     textAlign: 'center',
                 }}
             >
-                {renderable?.display?.labels?.text?.text}
+                {renderable?.view?.withSubtitle()?.text}
             </Typography>
         </Box>
     );

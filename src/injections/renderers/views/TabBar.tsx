@@ -4,11 +4,12 @@ import React from 'react';
 import {
     Drawer,
 } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import NavigationMenu from './NavigationMenu';
+import { Nullable } from 'Sudojo';
 
 const TabBar: React.FC<{
-    renderable?: Renderable | null;
+    renderable?: Nullable<IRenderable>;
     width: number;
     mobileOpen: boolean;
     handleDrawerToggle: () => void;

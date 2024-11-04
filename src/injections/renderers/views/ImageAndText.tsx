@@ -1,11 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { UIDevice } from '../../utils/UIDevice';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import { ImageHelper } from '../../utils/ImageHelper';
-import * as Sudojo from 'renderable';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 
-const ImageAndText: React.FC<{ renderable?: Renderable | null }> = ({
+const ImageAndText: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const handleClick = () => {
@@ -14,8 +15,8 @@ const ImageAndText: React.FC<{ renderable?: Renderable | null }> = ({
         );
     };
     const imageUrl =
-        renderable?.display?.image?.url ??
-        ImageHelper.localImageUrl(renderable?.display?.image?.local);
+        renderable?.view?.withImage()?.withUrl() ??
+        ImageHelper.localImageUrl(renderable?.view?.withImage()?.withLocal());
 
     return (
         <Box
@@ -32,7 +33,7 @@ const ImageAndText: React.FC<{ renderable?: Renderable | null }> = ({
                 <Box
                     component="img"
                     src={imageUrl}
-                    alt={renderable?.display?.labels?.title?.text}
+                    alt={renderable?.view?.withTitle()?.text}
                     sx={{
                         width: '32px',
                         height: '32px',
@@ -54,13 +55,13 @@ const ImageAndText: React.FC<{ renderable?: Renderable | null }> = ({
                     variant="h6"
                     sx={{ fontSize: '17px', color: 'black', mr: 1 }}
                 >
-                    {renderable?.display?.labels?.title?.text}
+                    {renderable?.view?.withTitle()?.text}
                 </Typography>
                 <Typography
                     variant="body2"
                     sx={{ fontSize: '14px', color: 'darkgray' }}
                 >
-                    {renderable?.display?.labels?.text?.text}
+                    {renderable?.view?.withSubtitle()?.text}
                 </Typography>
             </Box>
         </Box>

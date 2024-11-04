@@ -1,7 +1,7 @@
-import { Nullable } from 'renderable';
-import { LoginProtocol } from '../../types/protocols';
+import { Nullable } from 'Sudojo';
+import { ILogin } from '../../types/protocols';
 
-class Login implements LoginProtocol {
+class Login implements ILogin {
     login(
         callback: (
             p0: Nullable<string>,

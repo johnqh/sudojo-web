@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 
-const CenteredText: React.FC<{ renderable?: Renderable | null }> = ({
+const CenteredText: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const handleClick = () => {
@@ -23,7 +24,7 @@ const CenteredText: React.FC<{ renderable?: Renderable | null }> = ({
             }}
         >
             <Typography variant="h6" onClick={handleClick}>
-                {renderable?.display?.labels?.title?.text}
+                {renderable?.view?.withTitle()?.text}
             </Typography>
         </Box>
     );

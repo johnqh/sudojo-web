@@ -1,15 +1,16 @@
 import React from "react";
 import { Box, List, ListItem } from "@mui/material";
-import { Renderable } from "../../../types/protocols";
-import * as Sudojo from "renderable";
+import { IRenderable, ViewLayout } from "../../../types/protocols";
+import * as Sudojo from "Sudojo";
 import Renderer from "./Renderer";
 import { UIDevice } from "../../utils/UIDevice";
 import UIColor from "../utils/UIColor";
+import { Nullable } from "Sudojo";
 
-const UITableView: React.FC<{ renderable?: Renderable | null }> = ({
+const UITableView: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
 	renderable,
 }) => {
-	let children = renderable?.children;
+	let children: Nullable<IRenderable[]> = renderable?.view?.withChildren();
 	if (!children || children.length === 0) {
 		return null;
 	}
@@ -26,15 +27,16 @@ const UITableView: React.FC<{ renderable?: Renderable | null }> = ({
 	};
 
 	const sectioned =
-		renderable?.display?.presentation?.asScreen?.view?.layout ==
-		Sudojo.com.sudobility.renderable.renderable.Layout.Companion
-			.LIST_SECTIONED;
+		renderable?.view?.layout == ViewLayout.Companion.LIST_SECTIONED;
 
-	const list = sectioned
-		? Sudojo.com.sudobility.renderable.renderable.Renderable.Companion.flatten(
+	const list: Nullable<IRenderable[]> = sectioned
+		? Sudojo.com.sudobility.renderable.renderable.IRenderable.Companion.flatten(
 				children
 		  )
 		: children;
+	if (!list)
+		return null
+
 	return (
 		<List>
 			{list.map((child, index) => (

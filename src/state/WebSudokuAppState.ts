@@ -1,15 +1,15 @@
-import * as Sudojo from 'renderable';
-import { Nullable } from 'renderable';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 import IO from './injections/IO';
 import Login from './injections/Login';
 import Screen from './injections/Screen';
-import { Renderable } from '../types/protocols';
+import { IRenderable } from '../types/protocols';
 
 class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.statemanager
     .SudokuAppState {
     constructor(
         setCurrentId: (currentId: Nullable<string>) => void,
-        setRoot: (renderable: Nullable<Renderable>) => void
+        setRoot: (renderable: Nullable<IRenderable>) => void
     ) {
         super(
             // @ts-ignore

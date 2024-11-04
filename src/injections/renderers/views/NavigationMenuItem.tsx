@@ -1,11 +1,12 @@
 import React from 'react';
 import { UIDevice } from '../../utils/UIDevice';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import * as Sudojo from 'Sudojo';
 import JustImage from './JustImage';
+import { Nullable } from 'Sudojo';
 
 const NavigationMenuItem: React.FC<{
-    renderable?: Renderable | null;
+    renderable?: Nullable<IRenderable>;
     isSelected?: boolean;
 }> = ({ renderable, isSelected }) => {
     const handleClick = () => {
@@ -44,7 +45,7 @@ const NavigationMenuItem: React.FC<{
                 <JustImage renderable={renderable} />
             </div>
             <span style={textStyle}>
-                {renderable?.display?.labels?.title?.text}
+                {renderable?.view?.withTitle()?.text}
             </span>
         </div>
     );

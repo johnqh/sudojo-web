@@ -1,37 +1,41 @@
-import React from 'react';
-import NavigationMenuItem from './NavigationMenuItem';
-import { Renderable } from '../../../types/protocols';
-import { List, ListItem } from '@mui/material';
+import React from "react";
+import NavigationMenuItem from "./NavigationMenuItem";
+import { IRenderable } from "../../../types/protocols";
+import { List, ListItem } from "@mui/material";
+import { Nullable } from "Sudojo";
 
 const NavigationMenu: React.FC<{
-    renderable?: Renderable | null;
-    isSelected?: boolean;
+	renderable?: Nullable<IRenderable>;
+	isSelected?: boolean;
 }> = ({ renderable }) => {
-    const children = renderable?.children;
-    if (!children) {
-        return null;
-    }
+	const children = renderable?.view?.withChildren();
+	if (!children) {
+		return null;
+	}
 
-    // Define styles using React.CSSProperties
-    const containerStyle: React.CSSProperties = {
-        backgroundColor: 'white',
-        padding: '10px', // Optional padding for spacing
-    };
+	// Define styles using React.CSSProperties
+	const containerStyle: React.CSSProperties = {
+		backgroundColor: "white",
+		padding: "10px", // Optional padding for spacing
+	};
 
-    return (
-        <div style={containerStyle}>
-            <List>
-                {children.map((child) => (
-                    <ListItem key = {child.id}>
-                        <NavigationMenuItem
-                            renderable={child}
-                            isSelected={child.route == renderable.route}
-                        />
-                    </ListItem>
-                ))}
-            </List>
-        </div>
-    );
+	return (
+		<div style={containerStyle}>
+			<List>
+				{children.map((child) => (
+					<ListItem key={child.id}>
+						<NavigationMenuItem
+							renderable={child}
+							isSelected={
+								child.destination?.route ==
+								renderable?.destination?.route
+							}
+						/>
+					</ListItem>
+				))}
+			</List>
+		</div>
+	);
 };
 
 export default NavigationMenu;

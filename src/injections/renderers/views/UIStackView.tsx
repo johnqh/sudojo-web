@@ -1,11 +1,12 @@
 import React from 'react';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import Renderer from './Renderer';
+import { Nullable } from 'Sudojo';
 
-const UIStackView: React.FC<{ renderable?: Renderable | null }> = ({
+const UIStackView: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
-    let children = renderable?.children;
+    let children = renderable?.view?.withChildren();
     if (!children || children.length === 0) {
         return null;
     }

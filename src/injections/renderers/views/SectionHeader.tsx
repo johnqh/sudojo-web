@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
+import { Nullable } from 'Sudojo';
 
-const SectionHeader: React.FC<{ renderable?: Renderable | null }> = ({
+const SectionHeader: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     return (
@@ -22,7 +23,7 @@ const SectionHeader: React.FC<{ renderable?: Renderable | null }> = ({
                     fontSize: '14px',
                 }}
             >
-                {renderable?.display?.labels?.title?.text}
+                {renderable?.view?.withTitle()?.text}
             </Typography>
         </Box>
     );

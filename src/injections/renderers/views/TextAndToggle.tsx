@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormControlLabel, Checkbox } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import { Nullable } from 'Sudojo';
 
-const TextAndToggle: React.FC<{ renderable?: Renderable | null }> = ({
+const TextAndToggle: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     const handleClick = () => {
@@ -14,12 +14,12 @@ const TextAndToggle: React.FC<{ renderable?: Renderable | null }> = ({
             control={
                 <Checkbox
                     checked={
-                        renderable?.display?.presentation?.asItem?.value == '1'
+                        renderable?.view?.withValueText()?.text == "1"
                     }
                     onChange={handleClick}
                 />
             }
-            label={renderable?.display?.labels?.title?.text}
+            label={renderable?.view?.withTitle()?.text}
         />
     );
 };

@@ -1,4 +1,5 @@
-import { Renderable } from '../../../types/protocols';
+import { Nullable } from 'Sudojo';
+import { IRenderable } from '../../../types/protocols';
 import Action from './Action';
 import CenteredText from './CenteredText';
 import ImageAndText from './ImageAndText';
@@ -14,7 +15,7 @@ export default class ViewMapping {
     static shared?: ViewMapping;
 
     static defaultMap: {
-        [key: string]: React.FC<{ renderable?: Renderable | null }>;
+        [key: string]: React.FC<{ renderable?: Nullable<IRenderable> }>;
     } = {
         action: Action,
         center: CenteredText,
@@ -33,7 +34,7 @@ export default class ViewMapping {
     };
 
     static defaultAnd(more: {
-        [key: string]: React.FC<{ renderable?: Renderable | null }>;
+        [key: string]: React.FC<{ renderable?: Nullable<IRenderable> }>;
     }): ViewMapping {
         let defaultMapping = this.defaultMap;
         let modified = { ...defaultMapping, ...more };
@@ -41,18 +42,18 @@ export default class ViewMapping {
     }
 
     public readonly mapping: {
-        [key: string]: React.FC<{ renderable?: Renderable | null }>;
+        [key: string]: React.FC<{ renderable?: Nullable<IRenderable> }>;
     } = {};
 
     constructor(initialMapping: {
-        [key: string]: React.FC<{ renderable?: Renderable | null }>;
+        [key: string]: React.FC<{ renderable?: Nullable<IRenderable> }>;
     }) {
         this.mapping = { ...initialMapping };
     }
 
     public get(
         key?: string | null
-    ): React.FC<{ renderable?: Renderable | null }> | undefined {
+    ): React.FC<{ renderable?: Nullable<IRenderable> }> | undefined {
         if (!key) return undefined;
         return this.mapping[key];
     }

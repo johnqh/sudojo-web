@@ -1,8 +1,9 @@
 import React from 'react';
 import { CircularProgress, Box } from '@mui/material';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
+import { Nullable } from 'Sudojo';
 
-const Waiting: React.FC<{ renderable?: Renderable | null }> = ({
+const Waiting: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
     return (

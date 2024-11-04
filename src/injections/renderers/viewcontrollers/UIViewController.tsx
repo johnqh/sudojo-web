@@ -1,13 +1,14 @@
 import React from "react";
-import { Renderable } from "../../../types/protocols";
+import { IRenderable } from "../../../types/protocols";
 import RendererMapping from "../views/ViewMapping";
 import UIColor from "../utils/UIColor";
 import { Box } from "@mui/material";
-import { Nullable } from "renderable";
+import { Nullable } from "Sudojo";
 
-const UIViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?: Nullable<string> }> = ({
-	renderable,
-}) => {
+const UIViewController: React.FC<{
+	renderable?: Nullable<IRenderable>;
+	currentId?: Nullable<string>;
+}> = ({ renderable }) => {
 	console.log("UIViewController: " + renderable);
 
 	const containerStyle: React.CSSProperties = {
@@ -19,7 +20,7 @@ const UIViewController: React.FC<{ renderable?: Nullable<Renderable>, currentId?
 	};
 
 	const Component = RendererMapping.shared?.get(
-		renderable?.display?.presentation?.asScreen?.view?.layout
+		renderable?.screen?.view?.layout
 	);
 
 	if (!Component) {

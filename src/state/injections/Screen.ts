@@ -1,29 +1,29 @@
-import * as Sudojo  from 'renderable';
-import { Nullable } from 'renderable';
-import { Renderable, DisplayProtocol } from '../../types/protocols';
+import * as Sudojo  from 'Sudojo';
+import { Nullable } from 'Sudojo';
+import { IRenderable, IDisplay } from '../../types/protocols';
 
-class Screen implements DisplayProtocol {
+class Screen implements IDisplay {
     static shared?: Nullable<Screen> = null
     
     focused: Nullable<
-        (p0: Sudojo.com.sudobility.renderable.renderable.Renderable) => void
+        (p0: IRenderable) => void
         >;
     
     private _currentId: Nullable<string> = null
-    private _root: Nullable<Renderable> = null
+    private _root: Nullable<IRenderable> = null
     private _setCurrentId: Nullable<(currentId: Nullable<string>) => void> = null
-    private _setRoot: Nullable<(renderable: Nullable<Renderable>) => void> = null
+    private _setRoot: Nullable<(renderable: Nullable<IRenderable>) => void> = null
     
     constructor(
         setCurrentId: (currentId: Nullable<string>) => void,
-        setRoot: (renderable: Nullable<Renderable>) => void,
+        setRoot: (renderable: Nullable<IRenderable>) => void,
     ) {
         this._setCurrentId = setCurrentId;
         this._setRoot = setRoot;
         Screen.shared = this
     }
 
-    top(): Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable> {
+    top(): Nullable<IRenderable> {
         return this._root;
     }
 
@@ -39,7 +39,7 @@ class Screen implements DisplayProtocol {
         }
     }
 
-    current(): Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable> {
+    current(): Nullable<IRenderable> {
         const top = this.top();
         const currentId = this.currentId()
         if (currentId) {
@@ -50,7 +50,7 @@ class Screen implements DisplayProtocol {
     }
 
     root(
-        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        renderable: Nullable<IRenderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -62,8 +62,8 @@ class Screen implements DisplayProtocol {
     }
 
     push(
-        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
-        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        renderable: Nullable<IRenderable>,
+        parent: Nullable<IRenderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -71,16 +71,16 @@ class Screen implements DisplayProtocol {
     }
 
     pop(
-        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
-        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        renderable: Nullable<IRenderable>,
+        parent: Nullable<IRenderable>,
         animated?: boolean
     ): void {
         this.goto(parent)
     }
 
     prompt(
-        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
-        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        renderable: Nullable<IRenderable>,
+        parent: Nullable<IRenderable>,
         animated?: boolean,
         completion?: Nullable<(p0: boolean) => void>
     ): void {
@@ -88,14 +88,14 @@ class Screen implements DisplayProtocol {
     }
 
     dismiss(
-        renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
-        parent: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>,
+        renderable: Nullable<IRenderable>,
+        parent: Nullable<IRenderable>,
         animated?: boolean
     ): void {
         this.goto(parent)
     }
 
-    private goto(renderable: Nullable<Sudojo.com.sudobility.renderable.renderable.Renderable>) {
+    private goto(renderable: Nullable<IRenderable>) {
         this.setCurrentId(renderable?.id);
         const focused = this.focused;
         if (focused && renderable) {

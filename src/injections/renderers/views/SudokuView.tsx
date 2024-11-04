@@ -1,14 +1,15 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
-import { Renderable } from '../../../types/protocols';
-import * as Sudojo from 'renderable';
+import { IRenderable } from '../../../types/protocols';
+import * as Sudojo from 'Sudojo';
+import { Nullable } from 'Sudojo';
 
 // Utility function to get color from string or default
 const getColor = (color?: string, defaultColor: string = '#000000'): string => {
     return color || defaultColor;
 };
 
-const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) => {
+const SudokuView: React.FC<{renderable?: Nullable<IRenderable>}> = ({ renderable }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     // Font cache to store calculated font sizes by level
@@ -21,7 +22,7 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
     };
 
     // Function to handle navigation
-    const handleNavigate = (renderable: Renderable) => {
+    const handleNavigate = (renderable: IRenderable) => {
         Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
             renderable
         );
@@ -71,33 +72,36 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
     const drawBlock = (
         ctx: CanvasRenderingContext2D,
         rect: DOMRect,
-        renderable: Renderable,
+        renderable: IRenderable,
         level: number
     ) => {
+        let modifier = renderable.view?.withModifier()
         // Draw background color if provided
-        if (renderable.display?.presentation?.asItem?.bgColor) {
-            ctx.fillStyle = getColor(renderable.display?.presentation?.asItem?.bgColor?.rawValue, '#FFFFFF');
+        if (modifier?.bgColor) {
+            ctx.fillStyle = getColor(modifier?.bgColor?.rawValue, '#FFFFFF');
             ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
         }
 
         // Draw border if provided
-        if (renderable.display?.presentation?.asItem?.borderColor) {
-            ctx.strokeStyle = getColor(renderable.display?.presentation?.asItem?.borderColor?.rawValue, '#000000');
+        if (modifier?.borderColor) {
+            ctx.strokeStyle = getColor(modifier?.borderColor?.rawValue, '#000000');
             ctx.lineWidth = 2;
             ctx.strokeRect(rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2);
         }
 
+        let title = renderable.view?.withTitle()
         // Draw text if available
-        if (renderable.display?.labels?.title?.text) {
+        if (title?.text) {
             const fontSize = fontCache.current[level] || calculateFontSize(rect.width, rect.height);
             fontCache.current[level] = fontSize; // Cache the font size
 
+            let labelModifier = title.withModifier()
             drawText(
                 ctx,
-                renderable.display.labels.title.text,
+                title.text,
                 rect.x + rect.width / 2,
                 rect.y + rect.height / 2,
-                getColor(renderable.display?.labels?.title?.color?.rawValue, '#000000'),
+                getColor(labelModifier?.color?.rawValue, '#000000'),
                 fontSize
             );
         }
@@ -110,19 +114,20 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
     const processBlock = (
         ctx: CanvasRenderingContext2D,
         rect: DOMRect,
-        renderable: Renderable,
+        renderable: IRenderable,
         level: number,
         gridSize: number
     ) => {
         // Draw the current block
         drawBlock(ctx, rect, renderable, level);
 
+        let children = renderable?.view?.withChildren()
         // If there are child blocks, recursively draw them
-        if (renderable.children && renderable.children.length === 9 && !renderable.display?.labels?.title?.text) {
+        if (children && children.length === 9 && !renderable?.view?.withTitle()?.text) {
             const childWidth = (rect.width - gridSize * 2) / 3;
             const childHeight = (rect.height - gridSize * 2) / 3;
 
-            renderable.children.forEach((child, index) => {
+            children.forEach((child, index) => {
                 const row = Math.floor(index / 3);
                 const col = index % 3;
                 const childRect = new DOMRect(
@@ -184,7 +189,7 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
         const clickY = event.clientY - rect.top;
 
         // Function to detect which cell was clicked
-        const detectClick = (renderable: Renderable, rect: DOMRect, level: number): boolean => {
+        const detectClick = (renderable: IRenderable, rect: DOMRect, level: number): boolean => {
             if (!renderable) return false;
 
             // Check if this block contains the click
@@ -194,8 +199,9 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
                     return true;
                 }
 
+                let children = renderable?.view?.withChildren()
                 // If there are children, check them
-                if (renderable.children && renderable.children.length === 9) {
+                if (children && children.length === 9) {
                     const childWidth = (rect.width - 2) / 3;
                     const childHeight = (rect.height - 2) / 3;
 
@@ -208,7 +214,7 @@ const SudokuView: React.FC<{renderable?: Renderable | null}> = ({ renderable }) 
                             childWidth,
                             childHeight
                         );
-                        if (detectClick(renderable.children[i], childRect, level + 1)) {
+                        if (detectClick(children[i], childRect, level + 1)) {
                             return true;
                         }
                     }

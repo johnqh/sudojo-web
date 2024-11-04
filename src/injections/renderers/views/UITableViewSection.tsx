@@ -1,18 +1,20 @@
 import React from 'react';
 import SectionHeader from './SectionHeader'; // Assuming you have the SectionHeader component
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import { ListItem } from '@mui/material';
 import Renderer from './Renderer';
+import { Nullable } from 'Sudojo';
 
-const UITableViewSection: React.FC<{ renderable?: Renderable | null }> = ({
+const UITableViewSection: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
+    let children = renderable?.view?.withChildren()
     return (
         <>
             <SectionHeader renderable={renderable} />
 
             {/* List of TitleRows */}
-            {renderable?.children?.map((child, index) => (
+            {children?.map((child, index) => (
                 <ListItem key={index}>
                     <Renderer renderable={child} />
                 </ListItem>

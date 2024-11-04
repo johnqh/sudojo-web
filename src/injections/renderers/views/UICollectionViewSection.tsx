@@ -1,10 +1,11 @@
 import React from 'react';
 import SectionHeader from './SectionHeader'; // Assuming you have the SectionHeader component
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
 import Renderer from './Renderer';
+import { Nullable } from 'Sudojo';
 
 const UICollectionViewSection: React.FC<{
-    renderable?: Renderable | null;
+    renderable?: Nullable<IRenderable>;
     columns?: number;
 }> = ({ renderable, columns = 4 }) => {
     return (
@@ -12,7 +13,7 @@ const UICollectionViewSection: React.FC<{
             <SectionHeader renderable={renderable} />
 
             {/* List of TitleRows */}
-            {renderable?.children?.map((child, index) => (
+            {renderable?.view?.withChildren()?.map((child, index) => (
                 <Renderer key={index} renderable={child} />
             ))}
         </>

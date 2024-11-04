@@ -1,15 +1,16 @@
 import React from 'react';
-import { Renderable } from '../../../types/protocols';
+import { IRenderable } from '../../../types/protocols';
+import { Nullable } from 'Sudojo';
 
-const WebView: React.FC<{ renderable?: Renderable | null }> = ({
+const WebView: React.FC<{ renderable?: Nullable<IRenderable> }> = ({
     renderable,
 }) => {
-    const url = renderable?.display?.url;
+    const url = renderable?.view?.withUrl()?.url;
     if (!url) return null;
 
     return (
         <iframe
-            src={renderable?.display?.url?.replace("file:///", "/")}
+            src={url?.replace("file:///", "/")}
             title="Web View"
             style={{
                 width: '100%',
