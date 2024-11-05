@@ -9,9 +9,11 @@ import { Nullable } from "Sudojo";
 
 const ListView: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-	let children: Nullable<IRenderable[]> = renderable?.view?.withChildren();
+}> = ({ renderable, asScreen, isDarkMode }) => {
+	const view = renderable?.withView(asScreen);
+	let children: Nullable<IRenderable[]> = view?.withChildren();
 	if (!children || children.length === 0) {
 		return null;
 	}
@@ -27,11 +29,10 @@ const ListView: React.FC<{
 		justifyContent: "start", // Align breadcrumbs to the left
 	};
 
-	const sectioned =
-		renderable?.view?.layout == ViewLayout.Companion.LIST_SECTIONED;
+	const sectioned = view?.layout == ViewLayout.LIST_SECTIONED;
 
 	const list: Nullable<IRenderable[]> = sectioned
-		? Sudojo.com.sudobility.renderable.renderable.IRenderable.Companion.flatten(
+		? Sudojo.com.sudobility.renderable.renderable.IRenderable.flatten(
 				children
 		  )
 		: children;
@@ -41,7 +42,12 @@ const ListView: React.FC<{
 		<List>
 			{list.map((child, index) => (
 				<ListItem key={child.id}>
-					<Renderer renderable={child} isDarkMode={isDarkMode} /> {}
+					<Renderer
+						renderable={child}
+						asScreen={false}
+						isDarkMode={isDarkMode}
+					/>{" "}
+					{}
 				</ListItem>
 			))}
 		</List>

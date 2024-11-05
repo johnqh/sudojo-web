@@ -1,15 +1,16 @@
 import React from "react";
 import { Nullable } from "Sudojo";
 import { IRenderable } from "../../../types/protocols";
-import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../../injections/renderers/utils/UIColor";
 import { FormControl, InputLabel } from "@mui/material";
 
-const SliderLine: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text || ""; // Get the title from renderable
+const LineSlider: React.FC<{
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text || ""; // Get the title from renderable
     const colors = UIColor(isDarkMode);
 
     return (
@@ -23,4 +24,4 @@ const SliderLine: React.FC<{
     );
 };
 
-export default SliderLine;
+export default LineSlider;

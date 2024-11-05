@@ -8,11 +8,13 @@ import RendererContainer from "../renderers/RendererContainer";
 
 const Tile: React.FC<{
     renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
     isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text || ""; // Get the title from renderable
-    const subtitle = renderable?.view?.withSubtitle()?.text || ""; // Get the subtitle from renderable
-    const imageUrl = imageUrlOf(renderable?.view?.withImage());
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text || ""; // Get the title from renderable
+    const subtitle = view?.withSubtitle()?.text || ""; // Get the subtitle from renderable
+    const imageUrl = imageUrlOf(view?.withImage());
     const colors = UIColor(isDarkMode);
 
     const tileStyle: React.CSSProperties = {

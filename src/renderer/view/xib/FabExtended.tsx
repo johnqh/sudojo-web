@@ -5,11 +5,13 @@ import UIColor from "../../../injections/renderers/utils/UIColor";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 
 const FabExtended: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text;
-    const imageUrl = imageUrlOf(renderable?.view?.withImage());
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
+    const imageUrl = imageUrlOf(view?.withImage());
     const colors = UIColor(isDarkMode);
 
     const containerStyle: React.CSSProperties = {

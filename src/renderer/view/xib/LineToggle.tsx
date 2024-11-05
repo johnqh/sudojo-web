@@ -4,12 +4,14 @@ import { IRenderable } from "../../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../../injections/renderers/utils/UIColor";
 
-const ToggleLine: React.FC<{
+const LineToggle: React.FC<{
     renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
     isDarkMode: boolean;
-}> = ({ renderable, isDarkMode}) => {
-    const title = renderable?.view?.withTitle()?.text || ""; // Get the title from renderable
-    const checked = renderable?.view?.withValueText()?.text == "1"
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text || ""; // Get the title from renderable
+    const checked = view?.withValueText()?.text == "1"
     const colors = UIColor(isDarkMode);
 
     const containerStyle: React.CSSProperties = {
@@ -43,4 +45,4 @@ const ToggleLine: React.FC<{
     );
 };
 
-export default ToggleLine;
+export default LineToggle;

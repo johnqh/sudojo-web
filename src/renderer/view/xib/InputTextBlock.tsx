@@ -5,11 +5,13 @@ import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../../injections/renderers/utils/UIColor";
 
 const InputTextBlock: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text;
-    const valueText = renderable?.view?.withValueText()?.text;
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
+    const valueText = view?.withValueText()?.text;
     const colors = UIColor(isDarkMode);
 
     const containerStyle: React.CSSProperties = {

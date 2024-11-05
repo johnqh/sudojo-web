@@ -5,12 +5,14 @@ import { AppState, IRenderable } from "../../../types/protocols";
 
 const Action: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
 	const colors = UIColor(isDarkMode);
 
-    const width = renderable?.view?.withModifier()?.width;
-	const title = renderable?.view?.withTitle()?.text;
+    const width = view?.withModifier()?.width;
+	const title = view?.withTitle()?.text;
 
 	const containerStyle: React.CSSProperties = {
 		width: width ? `${width}px` : "100%",

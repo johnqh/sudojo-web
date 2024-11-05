@@ -5,8 +5,14 @@ import { IRenderable } from "../../../types/protocols";
 
 const LineTitleSubtitleValue: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+	const title = view?.withTitle()?.text;
+	const subtitle = view?.withSubtitle()?.text;
+	const valueText = view?.withValueText()?.text;
+
 	const colors = UIColor(isDarkMode);
 
 	const containerStyle: React.CSSProperties = {
@@ -48,10 +54,6 @@ const LineTitleSubtitleValue: React.FC<{
 		overflow: "hidden",
 		textOverflow: "ellipsis", // Adds ellipsis if content overflows
 	};
-
-	const title = renderable?.view?.withTitle()?.text;
-	const subtitle = renderable?.view?.withSubtitle()?.text;
-	const valueText = renderable?.view?.withValueText()?.text;
 
 	return (
 		<div style={containerStyle}>

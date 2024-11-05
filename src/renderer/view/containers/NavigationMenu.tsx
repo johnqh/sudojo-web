@@ -7,11 +7,13 @@ import Renderer from "../renderers/Renderer";
 
 const NavigationMenu: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-	isSelected?: boolean;
-}> = ({ renderable, isDarkMode }) => {
-	const children = renderable?.view?.withChildren();
-	if (!children) {
+	columns?: number;
+}> = ({ renderable, asScreen, isDarkMode, columns = 4 }) => {
+	const view = renderable?.withView(asScreen);
+	let children: Nullable<IRenderable[]> = view?.withChildren();
+	if (!children || children.length === 0) {
 		return null;
 	}
 
@@ -26,7 +28,11 @@ const NavigationMenu: React.FC<{
 			<List>
 				{children.map((child) => (
 					<ListItem key={child.id}>
-						<Renderer renderable={child} isDarkMode={isDarkMode} />
+						<Renderer
+							renderable={child}
+							asScreen={false}
+							isDarkMode={isDarkMode}
+						/>
 					</ListItem>
 				))}
 			</List>

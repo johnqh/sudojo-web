@@ -7,12 +7,14 @@ import RendererContainer from "../renderers/RendererContainer";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 
 const LineImageTitleSubtitle: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text;
-    const subtitle = renderable?.view?.withSubtitle()?.text;
-    const imageUrl = imageUrlOf(renderable?.view?.withImage());
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
+    const subtitle = view?.withSubtitle()?.text;
+    const imageUrl = imageUrlOf(view?.withImage());
     const colors = UIColor(isDarkMode);
     const labelColor = colors.label;
     const secondaryLabelColor = colors.secondaryLabel;

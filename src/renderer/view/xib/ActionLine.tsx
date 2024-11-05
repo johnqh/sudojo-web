@@ -6,10 +6,12 @@ import UIColor from "../../../injections/renderers/utils/UIColor";
 import { useClickable } from "../hooks/Clickable";
 
 const ActionLine: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text || ""; // Get the title from renderable
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text || ""; // Get the title from renderable
     const colors = UIColor(isDarkMode);
 
     const containerStyle: React.CSSProperties = {

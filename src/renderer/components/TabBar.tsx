@@ -31,7 +31,7 @@ const TabBar: React.FC<{
 					},
 				}}
 			>
-				<NavigationMenu renderable={renderable} isDarkMode={false} />
+				<NavigationMenu renderable={renderable} asScreen={true} isDarkMode={false} />
 			</Drawer>
 
 			{/* Permanent drawer for desktop */}
@@ -48,7 +48,7 @@ const TabBar: React.FC<{
 				}}
 				open
 			>
-				<NavigationMenu renderable={renderable} isDarkMode={false} />
+				<NavigationMenu renderable={renderable} asScreen={true} isDarkMode={false} />
 			</Drawer>
 		</>
 	);

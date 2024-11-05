@@ -5,10 +5,12 @@ import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 import RendererContainer from "../renderers/RendererContainer";
 
 const Image: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const imageUrl = imageUrlOf(renderable?.view?.withImage());
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const imageUrl = imageUrlOf(view?.withImage());
 
     const styleModifier: React.CSSProperties = {
         display: "flex",

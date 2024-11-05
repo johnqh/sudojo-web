@@ -8,10 +8,12 @@ import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 
 const NavImageItem: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-	const title = renderable?.view?.withTitle()?.text;
-	const imageUrl = imageUrlOf(renderable?.view?.withImage());
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+	const title = view?.withTitle()?.text;
+	const imageUrl = imageUrlOf(view?.withImage());
 	const colors = UIColor(isDarkMode);
 	const labelColor = colors.label;
 

@@ -29,7 +29,7 @@ const UIViewController: React.FC<{
 	}
 	return (
 		<Box style={containerStyle}>
-			<Component renderable={renderable} isDarkMode={isDarkMode} />
+			<Component renderable={renderable} asScreen={true} isDarkMode={isDarkMode} />
 		</Box>
 	);
 };

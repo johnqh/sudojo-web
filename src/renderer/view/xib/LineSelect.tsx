@@ -4,13 +4,15 @@ import { IRenderable } from "../../../types/protocols";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import UIColor from "../../../injections/renderers/utils/UIColor";
 
-const SelectLine: React.FC<{
+const LineSelect: React.FC<{
 	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-	const title = renderable?.view?.withTitle()?.text || ""; // Get the title from renderable
-	const valueText = renderable?.view?.withValueText()?.text || ""; // Get the title from renderable
-	const children = renderable?.view?.withChildren();
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+	const title = view?.withTitle()?.text || ""; // Get the title from renderable
+	const valueText = view?.withValueText()?.text || ""; // Get the title from renderable
+	const children = view?.withChildren();
 	const colors = UIColor(isDarkMode);
 
 	const onSelect = (value: string) => {};
@@ -46,4 +48,4 @@ const SelectLine: React.FC<{
 	);
 };
 
-export default SelectLine;
+export default LineSelect;

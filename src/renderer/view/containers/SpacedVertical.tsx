@@ -5,13 +5,17 @@ import Renderer from "../renderers/Renderer";
 import SpacerVertical from "../xib/SpacerVertical";
 
 const SpacedVertical: React.FC<{
-	renderable?: Nullable<IRenderable>; // Array of Renderable objects
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-	const children = renderable?.view?.withChildren();
+	columns?: number;
+}> = ({ renderable, asScreen, isDarkMode, columns = 4 }) => {
+	const view = renderable?.withView(asScreen);
+	let children: Nullable<IRenderable[]> = view?.withChildren();
 	if (!children || children.length === 0) {
 		return null;
 	}
+
 	return (
 		<div
 			style={{
@@ -22,8 +26,20 @@ const SpacedVertical: React.FC<{
 		>
 			{children.map((child, index) => (
 				<React.Fragment key={index}>
-					<Renderer key={child.id} renderable={child} isDarkMode={isDarkMode} /> {}
-					{index < children!.length - 1 && <SpacerVertical />}{" "}
+					<Renderer
+						key={child.id}
+						renderable={child}
+						asScreen={false}
+						isDarkMode={isDarkMode}
+					/>{" "}
+					{}
+					{index < children!.length - 1 && (
+						<SpacerVertical
+							renderable={child}
+							asScreen={false}
+							isDarkMode={isDarkMode}
+						/>
+					)}{" "}
 					{/* Add spacer between items */}
 				</React.Fragment>
 			))}

@@ -6,12 +6,14 @@ import UIColor from "../../../injections/renderers/utils/UIColor";
 import RendererContainer from "../renderers/RendererContainer";
 
 const LineTitleSubtitleValue: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text;
-    const subtitle = renderable?.view?.withSubtitle()?.text;
-    const valueText = renderable?.view?.withValueText()?.text;
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
+    const subtitle = view?.withSubtitle()?.text;
+    const valueText = view?.withValueText()?.text;
     const colors = UIColor(isDarkMode);
     const labelColor = colors.label;
     const secondaryLabelColor = colors.secondaryLabel;

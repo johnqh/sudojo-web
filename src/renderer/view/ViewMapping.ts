@@ -22,11 +22,11 @@ import LineTitleDetail from "./xib/LineTitleDetails";
 import LineTitleValue from "./xib/LineTitleValue";
 import NavImageItem from "./xib/NavImageItem";
 import NavItem from "./xib/NavItem";
-import SelectLine from "./xib/SelectLine";
+import LineSelect from "./xib/LineSelect";
 import SpacerHorizontal from "./xib/SpacerHorizontal";
 import SpacerVertical from "./xib/SpacerVertical";
 import Tile from "./xib/Tile";
-import ToggleLine from "./xib/ToggleLine";
+import LineToggle from "./xib/LineToggle";
 import ActionLine from "./xib/ActionLine";
 import LineImageTitleSubtitle from "./xib/LineImageTitleSubtitle";
 import LineImageTitleSubtitleValue from "./xib/LineImageTitleSubtitleValue";
@@ -40,7 +40,7 @@ import InputTextBlock from "./xib/InputTextBlock";
 import StackView from "./containers/StackView";
 import SpacedHorizontal from "./containers/SpacedHorizontal";
 import SpacedVertical from "./containers/SpacedVertical";
-import SliderLine from "./xib/SliderLine";
+import LineSlider from "./xib/LineSlider";
 
 export default class ViewMapping {
 	static shared?: ViewMapping;
@@ -48,6 +48,7 @@ export default class ViewMapping {
 	static defaultMap: {
 		[key: string]: React.FC<{
 			renderable?: Nullable<IRenderable>;
+			asScreen: boolean;
 			isDarkMode: boolean;
 		}>;
 	} = {
@@ -115,9 +116,9 @@ export default class ViewMapping {
 		input_text_block: InputTextBlock,
 		search: Search,
 
-		toggle_line: ToggleLine,
-		select_line: SelectLine,
-		slider_line: SliderLine,
+		line_toggle: LineToggle,
+		line_select: LineSelect,
+		line_slider: LineSlider,
 
 		// tabs_fixed: TabsFixed,
 		// tabs_scrollable: TabsScrollable,
@@ -130,6 +131,7 @@ export default class ViewMapping {
 	static defaultAnd(more: {
 		[key: string]: React.FC<{
 			renderable?: Nullable<IRenderable>;
+			asScreen: boolean;
 			isDarkMode: boolean;
 		}>;
 	}): ViewMapping {
@@ -141,20 +143,27 @@ export default class ViewMapping {
 	public readonly mapping: {
 		[key: string]: React.FC<{
 			renderable?: Nullable<IRenderable>;
+			asScreen: boolean;
 			isDarkMode: boolean;
 		}>;
 	} = {};
 
 	constructor(initialMapping: {
-        [key: string]: React.FC<{ renderable?: Nullable<IRenderable>; isDarkMode: boolean;  }>;
+		[key: string]: React.FC<{
+			renderable?: Nullable<IRenderable>;
+			asScreen: boolean;
+			isDarkMode: boolean;
+		}>;
 	}) {
 		this.mapping = { ...initialMapping };
 	}
 
-	public get(
-		key?: string | null
-	):
-		| React.FC<{ renderable?: Nullable<IRenderable>; isDarkMode: boolean }>
+	public get(key?: string | null):
+		| React.FC<{
+				renderable?: Nullable<IRenderable>;
+				asScreen: boolean;
+				isDarkMode: boolean;
+		  }>
 		| undefined {
 		if (!key) return undefined;
 		return this.mapping[key];

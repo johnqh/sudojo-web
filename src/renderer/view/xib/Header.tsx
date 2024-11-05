@@ -4,10 +4,12 @@ import { IRenderable } from "../../../types/protocols";
 import UIColor from "../../../injections/renderers/utils/UIColor";
 
 const Header: React.FC<{
-    renderable?: Nullable<IRenderable>;
-    isDarkMode: boolean;
-}> = ({ renderable, isDarkMode }) => {
-    const title = renderable?.view?.withTitle()?.text;
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
     const colors = UIColor(isDarkMode);
     const secondaryLabelColor = colors.secondaryLabel;
 
