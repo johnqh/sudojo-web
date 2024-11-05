@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box, CssBaseline, AppBar, Toolbar } from '@mui/material';
-import Footer from './components/Footer'; // Import Footer
-import ViewControllerMapping from './injections/renderers/viewcontrollers/ViewControllerMapping';
-import ViewMapping from './injections/renderers/views/ViewMapping';
-import UIWindow from './injections/renderers/viewcontrollers/UIWindow';
+import ViewControllerMapping from './renderer/screen/ViewControllerMapping';
+import UIWindow from './renderer/screen/UIWindow';
+import ViewMapping from './renderer/view/ViewMapping';
 
 const AppContent: React.FC = () => {
     useEffect(() => {

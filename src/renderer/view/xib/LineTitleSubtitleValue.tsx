@@ -1,0 +1,67 @@
+import React from "react";
+import UIColor from "../../../injections/renderers/utils/UIColor";
+import { Nullable } from "Sudojo";
+import { IRenderable } from "../../../types/protocols";
+
+const LineTitleSubtitleValue: React.FC<{
+	renderable?: Nullable<IRenderable>;
+	isDarkMode: boolean;
+}> = ({ renderable, isDarkMode }) => {
+	const colors = UIColor(isDarkMode);
+
+	const containerStyle: React.CSSProperties = {
+		backgroundColor: colors.tableCellBackground,
+		width: "100%",
+		minHeight: "48px",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "space-between",
+		padding: "8px 16px",
+	};
+
+	const leftContainerStyle: React.CSSProperties = {
+		display: "flex",
+		flexDirection: "column",
+		marginRight: "8px",
+	};
+
+	const titleStyle: React.CSSProperties = {
+		color: colors.label,
+		fontFamily: "Roboto, sans-serif",
+		fontSize: "17px",
+		marginBottom: "4px",
+		whiteSpace: "normal",
+	};
+
+	const subtitleStyle: React.CSSProperties = {
+		color: colors.secondaryLabel,
+		fontFamily: "Roboto, sans-serif",
+		fontSize: "12px",
+		whiteSpace: "normal",
+	};
+
+	const valueTextStyle: React.CSSProperties = {
+		color: colors.secondaryLabel,
+		fontFamily: "Roboto, sans-serif",
+		fontSize: "17px",
+		whiteSpace: "nowrap", // Prevents wrapping
+		overflow: "hidden",
+		textOverflow: "ellipsis", // Adds ellipsis if content overflows
+	};
+
+	const title = renderable?.view?.withTitle()?.text;
+	const subtitle = renderable?.view?.withSubtitle()?.text;
+	const valueText = renderable?.view?.withValueText()?.text;
+
+	return (
+		<div style={containerStyle}>
+			<div style={leftContainerStyle}>
+				<span style={titleStyle}>{title}</span>
+				<span style={subtitleStyle}>{subtitle}</span>
+			</div>
+			<span style={valueTextStyle}>{valueText}</span>
+		</div>
+	);
+};
+
+export default LineTitleSubtitleValue;

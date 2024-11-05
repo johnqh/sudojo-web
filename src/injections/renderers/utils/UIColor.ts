@@ -31,6 +31,14 @@ type UIColorType = {
     systemGray5: string;
     systemGray6: string;
     clear: string;
+
+    // New Colors
+    groupTableViewBackground: string;
+    tableViewBackground: string;
+    tableCellGroupedBackground: string;
+    tableCellBackground: string;
+    tableCellBlueText: string;
+    link: string;
 };
 
 // Light theme colors in RGBA format
@@ -67,6 +75,14 @@ const UIColorLight: UIColorType = {
     systemGray5: '#E5E5EAFF',
     systemGray6: '#F2F2F7FF',
     clear: '#00000000',
+    
+    // New Colors
+    groupTableViewBackground: '#F2F2F7FF',
+    tableViewBackground: '#FFFFFFFF',
+    tableCellGroupedBackground: '#FFFFFFFF',
+    tableCellBackground: '#FFFFFFFF',
+    tableCellBlueText: '#0A60FFFF',
+    link: '#0A84FFFF',
 };
 
 // Dark theme colors in RGBA format
@@ -103,6 +119,14 @@ const UIColorDark: UIColorType = {
     systemGray5: '#2C2C2EFF',
     systemGray6: '#1C1C1EFF',
     clear: '#00000000',
+
+    // New Colors
+    groupTableViewBackground: '#000000FF',
+    tableViewBackground: '#000000FF',
+    tableCellGroupedBackground: '#000000FF',
+    tableCellBackground: '#000000FF',
+    tableCellBlueText: '#0A60FFFF',
+    link: '#0A84FFFF',
 };
 
 // Example to switch between light and dark mode

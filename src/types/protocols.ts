@@ -51,3 +51,5 @@ export type IRenderer = Sudojo.com.sudobility.renderable.renderer.IRenderer;
 export const ScreenLayout = Sudojo.com.sudobility.renderable.renderable.protocols.ScreenLayout;
 export const ViewLayout = Sudojo.com.sudobility.renderable.renderable.protocols.ViewLayout;
 export const SudokuLayout = Sudojo.com.sudobility.renderable.sudokuschool.renderable.SudokuLayout;
+
+export const AppState = Sudojo.com.sudobility.renderable.renderable.state.AppState;
