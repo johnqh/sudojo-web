@@ -27,7 +27,6 @@ import SpacerHorizontal from "./xib/SpacerHorizontal";
 import SpacerVertical from "./xib/SpacerVertical";
 import Tile from "./xib/Tile";
 import LineToggle from "./xib/LineToggle";
-import ActionLine from "./xib/ActionLine";
 import LineImageTitleSubtitle from "./xib/LineImageTitleSubtitle";
 import LineImageTitleSubtitleValue from "./xib/LineImageTitleSubtitleValue";
 import LineTitleSubtitle from "./xib/LineTitleSubtitle";
@@ -41,6 +40,9 @@ import StackView from "./containers/StackView";
 import SpacedHorizontal from "./containers/SpacedHorizontal";
 import SpacedVertical from "./containers/SpacedVertical";
 import LineSlider from "./xib/LineSlider";
+import LineAction from "./xib/LineAction";
+import StackedHorizontal from "./containers/StackedHorizontal";
+import StackedVertical from "./containers/StackedVertical";
 
 export default class ViewMapping {
 	static shared?: ViewMapping;
@@ -66,9 +68,9 @@ export default class ViewMapping {
 		// carousel: Carousel,
 		// map: Map,
 		stacked: StackView,
-		stacked_horizontal: StackView,
-		stacked_vertical: StackView,
-		stacked_dynamic: StackView,
+		stacked_horizontal: StackedHorizontal,
+		stacked_vertical: StackedVertical,
+		stacked_dynamic: StackedVertical,
 
 		// calendar: Calendar,
 
@@ -81,7 +83,7 @@ export default class ViewMapping {
 		header: Header,
 
 		action: Action,
-		action_line: ActionLine,
+		line_action: LineAction,
 
 		chip: Chip,
 

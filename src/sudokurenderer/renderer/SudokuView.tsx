@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
-import { IRenderable } from '../../../renderer/types/protocols';
+import { AppState, IRenderable } from '../../renderer/types/protocols';
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';
 
@@ -9,7 +9,11 @@ const getColor = (color?: string, defaultColor: string = '#000000'): string => {
     return color || defaultColor;
 };
 
-const SudokuView: React.FC<{renderable?: Nullable<IRenderable>}> = ({ renderable }) => {
+const SudokuView: React.FC<{
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     // Font cache to store calculated font sizes by level
@@ -23,7 +27,7 @@ const SudokuView: React.FC<{renderable?: Nullable<IRenderable>}> = ({ renderable
 
     // Function to handle navigation
     const handleNavigate = (renderable: IRenderable) => {
-        Sudojo.com.sudobility.renderable.renderable.state.AppState.Companion.instance?.navigate(
+        AppState.Companion.instance?.navigate(
             renderable
         );
     };
@@ -171,12 +175,17 @@ const SudokuView: React.FC<{renderable?: Nullable<IRenderable>}> = ({ renderable
         if (!ctx) return;
 
         const rect = canvas.getBoundingClientRect();
-
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        const drawRect = new DOMRect(
+            0,
+            0,
+            rect.width,
+            rect.height,
+        );
         // Start drawing
-        draw(ctx, rect);
+        draw(ctx, drawRect);
     }, [renderable, draw]);
 
     // Function to handle touch/click events

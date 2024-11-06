@@ -3,7 +3,7 @@ import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
 import Renderer from "../renderers/Renderer";
 
-const SpacedVertical: React.FC<{
+const StackedVertical: React.FC<{
 	renderable?: Nullable<IRenderable>;
 	asScreen: boolean;
 	isDarkMode: boolean;
@@ -35,4 +35,4 @@ const SpacedVertical: React.FC<{
 	);
 };
 
-export default SpacedVertical;
+export default StackedVertical;

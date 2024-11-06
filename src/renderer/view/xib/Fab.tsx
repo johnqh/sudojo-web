@@ -3,6 +3,8 @@ import { Nullable } from "Sudojo";
 import { AppState, IRenderable } from "../../types/protocols";
 import UIColor from "../../utils/UIColor";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
+import { DestinationHandler } from "../../utils/DestinationHandler";
+import { useNavigate } from "react-router-dom";
 
 const Fab: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -35,10 +37,12 @@ const Fab: React.FC<{
     };
 
 	const handleClick = () => {
-		AppState.Companion.instance?.navigate(
-			renderable
-		);
-	};
+		DestinationHandler.handle(renderable, (path) => {
+			const navigate = useNavigate();
+			navigate(path);
+		})
+	}
+
 
     return (
         <button style={containerStyle} onClick={handleClick}>

@@ -4,7 +4,7 @@ import ViewController from "./ViewController";
 import { Nullable } from "Sudojo";
 import * as Sudojo from "Sudojo";
 import { IRenderable } from "../types/protocols";
-import WebSudokuAppState from "../../state/WebSudokuAppState";
+import WebSudokuAppState from "../../sudokurenderer/injections/WebSudokuAppState";
 import UIColor from "../utils/UIColor";
 
 const UIWindow: React.FC<{}> = ({}) => {

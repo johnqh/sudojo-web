@@ -1,9 +1,9 @@
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';
-import IO from './injections/IO';
-import Login from './injections/Login';
-import Screen from './injections/Screen';
-import { IRenderable } from '../renderer/types/protocols';
+import RendererIO from '../../renderer/injections/RendererIO';
+import Login from '../../renderer/injections/Login';
+import Screen from '../../renderer/injections/Screen';
+import { IRenderable } from '../../renderer/types/protocols';
 
 class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.statemanager
     .SudokuAppState {
@@ -13,7 +13,7 @@ class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.st
     ) {
         super(
             // @ts-ignore
-            new IO(),
+            new RendererIO(),
             new Login(),
             Sudojo.com.sudobility.renderable.sudokuschool.utils.Scrambler,
             new Screen(setCurrentId, setRoot)

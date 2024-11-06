@@ -1,5 +1,5 @@
 import { Nullable } from 'Sudojo';
-import { ILogin } from '../../renderer/types/protocols';
+import { ILogin } from '../types/protocols';
 
 class Login implements ILogin {
     login(
@@ -10,7 +10,7 @@ class Login implements ILogin {
             p3: Nullable<string>
         ) => void
     ): void {
-        throw new Error('Method not implemented.');
+        // throw new Error('Method not implemented.');
     }
     logout(
         callback: (
@@ -20,7 +20,7 @@ class Login implements ILogin {
             p3: Nullable<string>
         ) => void
     ): void {
-        throw new Error('Method not implemented.');
+        // throw new Error('Method not implemented.');
     }
 }
 

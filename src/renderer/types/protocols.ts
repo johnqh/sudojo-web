@@ -53,3 +53,5 @@ export const ViewLayout = Sudojo.com.sudobility.renderable.renderable.protocols.
 export const SudokuLayout = Sudojo.com.sudobility.renderable.sudokuschool.renderable.SudokuLayout;
 
 export const AppState = Sudojo.com.sudobility.renderable.renderable.state.AppState;
+export const IOVerb = Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb;
+export type Params = Sudojo.com.sudobility.renderable.renderable.utils.Params;

@@ -1,6 +1,6 @@
 import * as Sudojo  from 'Sudojo';
 import { Nullable } from 'Sudojo';
-import { IRenderable, IDisplay } from '../../renderer/types/protocols';
+import { IRenderable, IDisplay } from '../types/protocols';
 
 class Screen implements IDisplay {
     static shared?: Nullable<Screen> = null

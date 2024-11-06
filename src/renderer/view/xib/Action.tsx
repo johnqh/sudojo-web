@@ -2,6 +2,8 @@ import React from "react";
 import UIColor from "../../utils/UIColor";
 import { Nullable } from "Sudojo";
 import { AppState, IRenderable } from "../../types/protocols";
+import { DestinationHandler } from "../../utils/DestinationHandler";
+import { useNavigate } from "react-router-dom";
 
 const Action: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -35,10 +37,11 @@ const Action: React.FC<{
 	};
 
 	const handleClick = () => {
-		AppState.Companion.instance?.navigate(
-			renderable
-		);
-	};
+		DestinationHandler.handle(renderable, (path) => {
+			const navigate = useNavigate();
+			navigate(path);
+		})
+	}
 
 	return (
 		<div style={containerStyle}>
