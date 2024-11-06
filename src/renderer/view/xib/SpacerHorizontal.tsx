@@ -1,6 +1,6 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 
 const SpacerHorizontal: React.FC<{
 	renderable?: Nullable<IRenderable>;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { AppState, IRenderable } from "../../../types/protocols";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import { AppState, IRenderable } from "../../types/protocols";
+import UIColor from "../../utils/UIColor";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 
 const FabExtended: React.FC<{

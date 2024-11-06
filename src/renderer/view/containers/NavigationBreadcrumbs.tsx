@@ -1,6 +1,6 @@
 import React from 'react';
-import { IRenderable } from '../../../types/protocols';
-import { UIDevice } from '../../../injections/utils/UIDevice';
+import { IRenderable } from '../../types/protocols';
+import { UIDevice } from '../../utils/UIDevice';
 import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';

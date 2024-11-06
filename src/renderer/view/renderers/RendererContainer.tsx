@@ -1,6 +1,6 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import { useClickable } from "../hooks/Clickable";
 import CommonStyles from "../renderers/CommonStyles";
 

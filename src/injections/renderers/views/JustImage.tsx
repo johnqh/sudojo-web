@@ -1,6 +1,6 @@
 import React from "react";
-import { IRenderable } from "../../../types/protocols";
-import { ImageHelper } from "../../utils/ImageHelper";
+import { IRenderable } from "../../../renderer/types/protocols";
+import { ImageHelper } from "../../../renderer/utils/ImageHelper";
 import * as Sudojo from "Sudojo";
 import { Nullable } from "Sudojo";
 

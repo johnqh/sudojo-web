@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { IRenderable } from '../../../types/protocols';
+import { IRenderable } from '../../../renderer/types/protocols';
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';
 

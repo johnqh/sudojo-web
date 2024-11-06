@@ -1,8 +1,8 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import UIColor from "../../utils/UIColor";
 
 const InputPassword: React.FC<{
 	renderable?: Nullable<IRenderable>;

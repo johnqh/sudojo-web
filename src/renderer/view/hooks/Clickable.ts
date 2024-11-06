@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AppState, IRenderable } from "../../../types/protocols";
+import { AppState, IRenderable } from "../../types/protocols";
 import { Nullable } from "Sudojo";
 
 export const useClickable = (renderable?: Nullable<IRenderable>) => {

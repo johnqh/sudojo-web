@@ -7,8 +7,8 @@ import {
     MenuItem,
     Typography,
 } from '@mui/material';
-import { IRenderable } from '../../../types/protocols';
-import { UIDevice } from '../../utils/UIDevice';
+import { IRenderable } from '../../../renderer/types/protocols';
+import { UIDevice } from '../../../renderer/utils/UIDevice';
 import { Nullable } from 'Sudojo';
 
 const TextAndSelect: React.FC<{ renderable?: Nullable<IRenderable> }> = ({

@@ -1,8 +1,8 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import UIColor from "../../utils/UIColor";
 
 const LineSelect: React.FC<{
 	renderable?: Nullable<IRenderable>;

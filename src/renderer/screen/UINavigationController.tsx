@@ -1,7 +1,7 @@
 import React from "react";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 import NavigationBreadcrumbs from "../view/containers/NavigationBreadcrumbs";
-import UIColor from "../../injections/renderers/utils/UIColor";
+import UIColor from "../utils/UIColor";
 import { Nullable } from "Sudojo";
 import ViewController from "./ViewController";
 

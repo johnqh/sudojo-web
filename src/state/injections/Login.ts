@@ -1,5 +1,5 @@
 import { Nullable } from 'Sudojo';
-import { ILogin } from '../../types/protocols';
+import { ILogin } from '../../renderer/types/protocols';
 
 class Login implements ILogin {
     login(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControlLabel, Checkbox } from '@mui/material';
-import { IRenderable } from '../../../types/protocols';
+import { IRenderable } from '../../../renderer/types/protocols';
 import { Nullable } from 'Sudojo';
 
 const TextAndToggle: React.FC<{ renderable?: Nullable<IRenderable> }> = ({

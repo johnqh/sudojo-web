@@ -5,9 +5,9 @@ import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { auth } from "../../../firebase";
 import { useAuth } from "../../../AuthContext";
-import { IRenderable } from "../../../types/protocols";
-import { UIDevice } from "../../../injections/utils/UIDevice";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import { IRenderable } from "../../types/protocols";
+import { UIDevice } from "../../utils/UIDevice";
+import UIColor from "../../utils/UIColor";
 import { Nullable } from "Sudojo";
 
 const TopBar: React.FC<{

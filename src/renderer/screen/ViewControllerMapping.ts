@@ -1,5 +1,5 @@
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 import UITabBarController from "./UITabBarController";
 import UIViewController from "./UIViewController";
 

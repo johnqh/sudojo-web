@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import { IRenderable, ViewLayout } from "../../../types/protocols";
+import { IRenderable, ViewLayout } from "../../types/protocols";
 import Renderer from "../renderers/Renderer";
 import { Nullable } from "Sudojo";
 import * as Sudojo from "Sudojo";

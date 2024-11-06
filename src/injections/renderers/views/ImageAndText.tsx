@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { UIDevice } from '../../utils/UIDevice';
-import { IRenderable } from '../../../types/protocols';
-import { ImageHelper } from '../../utils/ImageHelper';
+import { UIDevice } from '../../../renderer/utils/UIDevice';
+import { IRenderable } from '../../../renderer/types/protocols';
+import { ImageHelper } from '../../../renderer/utils/ImageHelper';
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';
 

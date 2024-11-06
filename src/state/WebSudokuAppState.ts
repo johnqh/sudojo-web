@@ -3,7 +3,7 @@ import { Nullable } from 'Sudojo';
 import IO from './injections/IO';
 import Login from './injections/Login';
 import Screen from './injections/Screen';
-import { IRenderable } from '../types/protocols';
+import { IRenderable } from '../renderer/types/protocols';
 
 class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.statemanager
     .SudokuAppState {

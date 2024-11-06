@@ -1,6 +1,6 @@
 import * as Sudojo  from 'Sudojo';
 import { Nullable } from 'Sudojo';
-import { INativeIO } from '../../types/protocols';
+import { INativeIO } from '../../renderer/types/protocols';
 
 class IO implements INativeIO {
     http(

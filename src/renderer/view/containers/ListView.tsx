@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, List, ListItem } from "@mui/material";
-import { IRenderable, ViewLayout } from "../../../types/protocols";
+import { IRenderable, ViewLayout } from "../../types/protocols";
 import * as Sudojo from "Sudojo";
 import Renderer from "../renderers/Renderer";
-import { UIDevice } from "../../../injections/utils/UIDevice";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import { UIDevice } from "../../utils/UIDevice";
+import UIColor from "../../utils/UIColor";
 import { Nullable } from "Sudojo";
 
 const ListView: React.FC<{

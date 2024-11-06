@@ -1,7 +1,7 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import { IRenderable } from "../../types/protocols";
+import UIColor from "../../utils/UIColor";
 
 const Header: React.FC<{
 	renderable?: Nullable<IRenderable>;

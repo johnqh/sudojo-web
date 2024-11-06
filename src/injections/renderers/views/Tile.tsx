@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { IRenderable } from '../../../types/protocols';
+import { IRenderable } from '../../../renderer/types/protocols';
 import * as Sudojo from 'Sudojo';
-import { ImageHelper } from '../../utils/ImageHelper';
+import { ImageHelper } from '../../../renderer/utils/ImageHelper';
 import { Nullable } from 'Sudojo';
 
 const Tile: React.FC<{ renderable?: Nullable<IRenderable> }> = ({ renderable }) => {

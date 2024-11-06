@@ -3,9 +3,9 @@ import { Box } from "@mui/material";
 import ViewController from "./ViewController";
 import { Nullable } from "Sudojo";
 import * as Sudojo from "Sudojo";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 import WebSudokuAppState from "../../state/WebSudokuAppState";
-import UIColor from "../../injections/renderers/utils/UIColor";
+import UIColor from "../utils/UIColor";
 
 const UIWindow: React.FC<{}> = ({}) => {
 	const [currentId, setCurrentId] = useState<Nullable<string>>(null);

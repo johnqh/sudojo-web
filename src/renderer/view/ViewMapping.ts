@@ -1,5 +1,5 @@
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 import Action from "./xib/Action";
 import Waiting from "./xib/Waiting";
 import { Carousel } from "react-responsive-carousel";

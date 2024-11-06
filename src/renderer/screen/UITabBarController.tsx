@@ -5,7 +5,7 @@ import TabBar from "../components/TabBar";
 import UINavigationController from "./UINavigationController";
 import TopBar from "../view/containers/TopBar";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 
 const UITabBarController: React.FC<{
 	renderable?: Nullable<IRenderable>;

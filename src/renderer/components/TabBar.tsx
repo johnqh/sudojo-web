@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Drawer } from "@mui/material";
-import { IRenderable } from "../../types/protocols";
+import { IRenderable } from "../types/protocols";
 import NavigationMenu from "../view/containers/NavigationMenu";
 import { Nullable } from "Sudojo";
 

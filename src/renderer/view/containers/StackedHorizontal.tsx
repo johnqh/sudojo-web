@@ -1,6 +1,6 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import Renderer from "../renderers/Renderer";
 
 const StackedHorizontal: React.FC<{

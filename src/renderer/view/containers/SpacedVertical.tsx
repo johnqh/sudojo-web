@@ -1,6 +1,6 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import Renderer from "../renderers/Renderer";
 import SpacerVertical from "../xib/SpacerVertical";
 

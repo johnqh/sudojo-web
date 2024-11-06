@@ -1,6 +1,6 @@
 import React from 'react';
-import { UIDevice } from '../../utils/UIDevice';
-import { IRenderable } from '../../../types/protocols';
+import { UIDevice } from '../../../renderer/utils/UIDevice';
+import { IRenderable } from '../../../renderer/types/protocols';
 import * as Sudojo from 'Sudojo';
 import { Nullable } from 'Sudojo';
 

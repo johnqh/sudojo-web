@@ -1,6 +1,6 @@
 import { Nullable } from "Sudojo";
-import UIColor from "../../../injections/renderers/utils/UIColor";
-import { UIDevice } from "../../../injections/utils/UIDevice";
+import UIColor from "../../utils/UIColor";
+import { UIDevice } from "../../utils/UIDevice";
 
 type CommonStylesProps = {
 	isDarkMode: boolean;

@@ -1,8 +1,8 @@
 import React from "react";
 import { Nullable } from "Sudojo";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import UIColor from "../../utils/UIColor";
 import RendererContainer from "../renderers/RendererContainer";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 

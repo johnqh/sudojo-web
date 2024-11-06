@@ -1,5 +1,5 @@
 import React from "react";
-import { IRenderable } from "../../../types/protocols";
+import { IRenderable } from "../../types/protocols";
 import { Nullable } from "Sudojo";
 import ViewMapping from "../ViewMapping";
 

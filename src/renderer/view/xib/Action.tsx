@@ -1,7 +1,7 @@
 import React from "react";
-import UIColor from "../../../injections/renderers/utils/UIColor";
+import UIColor from "../../utils/UIColor";
 import { Nullable } from "Sudojo";
-import { AppState, IRenderable } from "../../../types/protocols";
+import { AppState, IRenderable } from "../../types/protocols";
 
 const Action: React.FC<{
 	renderable?: Nullable<IRenderable>;
