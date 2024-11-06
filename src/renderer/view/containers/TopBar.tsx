@@ -41,7 +41,7 @@ const TopBar: React.FC<{
 
 	const iconButtonStyle: React.CSSProperties = {
 		marginRight: 8, // mr: 2 equivalent
-		display: "none", // Will be overwritten by `sx`
+		// display: "none", // Will be overwritten by `sx`
 	};
 
 	const typographyStyle: React.CSSProperties = {

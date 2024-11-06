@@ -23,7 +23,7 @@ const LineToggle: React.FC<{
     };
 
     const titleStyle: React.CSSProperties = {
-        ...CommonStyles.lineSubtitleStyle(colors.secondaryLabel, 14), // Using subtitle style
+        ...CommonStyles.lineTitleStyle(colors.label, 14), // Using subtitle style
         marginRight: "8px", // Space between title and checkbox
     };
 

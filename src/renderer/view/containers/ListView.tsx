@@ -29,6 +29,11 @@ const ListView: React.FC<{
 		justifyContent: "start", // Align breadcrumbs to the left
 	};
 
+	const itemStyle: React.CSSProperties = {
+		width: "100%",
+	};
+
+
 	const sectioned = view?.layout == ViewLayout.LIST_SECTIONED;
 
 	const list: Nullable<IRenderable[]> = sectioned
@@ -41,7 +46,7 @@ const ListView: React.FC<{
 	return (
 		<List>
 			{list.map((child, index) => (
-				<ListItem key={child.id}>
+				<ListItem key={child.id} style={itemStyle}>
 					<Renderer
 						renderable={child}
 						asScreen={false}

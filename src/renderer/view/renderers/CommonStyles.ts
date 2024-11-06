@@ -31,6 +31,7 @@ class CommonStyles {
 			display: "flex",
 			alignItems: "center",
 			padding: "8px 16px",
+			borderRadius: "8px", 
 			cursor: isClickable ? "pointer" : "default",
 			transition: "background-color 0.2s ease",
 		};
@@ -49,7 +50,7 @@ class CommonStyles {
 
 	static lineTitleStyle(
 		color: string,
-		fontSize: number = 17,
+		fontSize: number = 14,
 	): React.CSSProperties {
 		return this.textStyle(
 			(color = color),
@@ -69,7 +70,7 @@ class CommonStyles {
 
 	static lineValueTextStyle(
 		color: string,
-		fontSize: number = 17,
+		fontSize: number = 14,
 	): React.CSSProperties {
 		return this.textStyle(
 			(color = color),
@@ -79,7 +80,7 @@ class CommonStyles {
 
 	static lineDetailsStyle(
 		color: string,
-		fontSize: number = 17,
+		fontSize: number = 14,
 	): React.CSSProperties {
 		return this.textStyle(
 			(color = color),
@@ -91,7 +92,7 @@ class CommonStyles {
     static inputStyle(
         color: string,
         backgroundColor: string,
-		fontSize: number = 17,
+		fontSize: number = 14,
 	): React.CSSProperties {
         return {
             ...CommonStyles.lineTitleStyle(color, 14), // Using line title style for input
@@ -106,8 +107,8 @@ class CommonStyles {
 
     
 	static lineImageStyle: React.CSSProperties = {
-		width: "32px",
-		height: "32px",
+		width: "24px",
+		height: "24px",
 		objectFit: "cover", // Crops the image if not square
 		marginRight: "8px", // Space between image and title
 	};
