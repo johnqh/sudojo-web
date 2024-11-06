@@ -1,5 +1,4 @@
 import React from "react";
-import NavigationMenuItem from "../../../injections/renderers/views/NavigationMenuItem";
 import { IRenderable } from "../../types/protocols";
 import { List, ListItem } from "@mui/material";
 import { Nullable } from "Sudojo";

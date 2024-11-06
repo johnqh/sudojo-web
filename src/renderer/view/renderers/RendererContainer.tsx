@@ -1,55 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
-import { useClickable } from "../hooks/Clickable";
 import CommonStyles from "../renderers/CommonStyles";
+import { useNavigate } from "react-router-dom";
 
 const RendererContainer: React.FC<{
-	renderable?: Nullable<IRenderable>;
+    renderable?: Nullable<IRenderable>;
     isDarkMode: boolean;
-    styleModifier: Nullable<React.CSSProperties>;
+    styleModifier?: Nullable<React.CSSProperties>;
     bgColor?: Nullable<string>;
     activeBgColor?: Nullable<string>;
-	children: React.ReactNode;
+    children: React.ReactNode;
 }> = ({
-	renderable,
+    renderable,
     isDarkMode,
     styleModifier,
     bgColor,
     activeBgColor,
-	children,
+    children,
 }) => {
-	const {
-		isActive,
-		handleMouseDown,
-		handleMouseUp,
-		handleMouseLeave,
-		handleClick,
-		isClickable,
-	} = useClickable(renderable);
+    const [isActive, setIsActive] = useState(false);
+    const navigate = useNavigate();
+
+    const handleMouseDown = () => {
+        setIsActive(true);
+    };
+
+    const handleMouseUp = () => {
+        setIsActive(false);
+        // Navigate if a route is defined
+        const route = renderable?.destination?.route; // Assuming renderable has a withRoute method
+        if (route) {
+            navigate(route);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setIsActive(false);
+    };
 
     const containerStyle = {
         ...CommonStyles.containerStyle({
             isDarkMode,
             isActive,
-            isClickable,
+            isClickable: true, // Since we are handling clicks directly
             bgColor,
             activeBgColor,
         }),
-        ...styleModifier
-    }
+        ...styleModifier,
+    };
 
-	return (
-		<div
-			style={containerStyle}
-			onClick={handleClick}
-			onMouseDown={handleMouseDown}
-			onMouseUp={handleMouseUp}
-			onMouseLeave={handleMouseLeave}
-		>
-			{children}
-		</div>
-	);
+    return (
+        <div
+            style={containerStyle}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default RendererContainer;

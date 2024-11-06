@@ -21,14 +21,15 @@ const NavImageItem: React.FC<{
 		flexDirection: "row",
 		alignItems: "center", // Ensures image and title are vertically aligned
 	};
+	console.log("navItem " + title)
 
 	return (
 		<RendererContainer
 			renderable={renderable}
 			isDarkMode={isDarkMode}
             styleModifier={styleModifier}
-            bgColor={colors.secondaryLabel}
-            activeBgColor={colors.tertiaryLabel}
+            bgColor={colors.tertiaryLabel}
+            activeBgColor={colors.secondaryLabel}
 		>
 			{imageUrl && (
 				<img

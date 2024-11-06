@@ -10,19 +10,24 @@ const NavItem: React.FC<{
 	asScreen: boolean;
 	isDarkMode: boolean;
 }> = ({ renderable, asScreen, isDarkMode }) => {
-    const view = renderable?.withView(asScreen)
-    const title = view?.withTitle()?.text;
-    const colors = UIColor(isDarkMode);
-    const labelColor = colors.label;
+	const view = renderable?.withView(asScreen);
+	const title = view?.withTitle()?.text;
+	const colors = UIColor(isDarkMode);
+	const labelColor = colors.label;
 
-    const styleModifier: React.CSSProperties = {
-    };
+	const styleModifier: React.CSSProperties = {};
 
-    return (
-        <RendererContainer renderable={renderable} isDarkMode={isDarkMode} styleModifier={styleModifier}>
-            <span style={CommonStyles.lineTitleStyle(labelColor)}>{title}</span>
-        </RendererContainer>
-    );
+	return (
+		<RendererContainer
+			renderable={renderable}
+			isDarkMode={isDarkMode}
+			styleModifier={styleModifier}
+            bgColor={colors.tertiaryLabel}
+            activeBgColor={colors.secondaryLabel}
+		>
+			<span style={CommonStyles.lineTitleStyle(labelColor)}>{title}</span>
+		</RendererContainer>
+	);
 };
 
 export default NavItem;
