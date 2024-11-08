@@ -1,4 +1,4 @@
-type UIColorType = {
+export type UIColorType = {
     systemBackground: string;
     secondarySystemBackground: string;
     tertiarySystemBackground: string;

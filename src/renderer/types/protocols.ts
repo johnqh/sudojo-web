@@ -33,7 +33,7 @@ export type IRenderableUrl = Sudojo.com.sudobility.renderable.renderable.IRender
 export type IRenderableScreen = Sudojo.com.sudobility.renderable.renderable.IRenderableScreen;
 export type IRenderableScreenModifier = Sudojo.com.sudobility.renderable.renderable.IRenderableScreenModifier;
 
-export type IWithAccessories = Sudojo.com.sudobility.renderable.renderable.IWithAccessories;
+export type IWithScreenModifier = Sudojo.com.sudobility.renderable.renderable.IWithScreenModifier;
 export type IWithBackground = Sudojo.com.sudobility.renderable.renderable.IWithBackground;
 export type IWithDetails = Sudojo.com.sudobility.renderable.renderable.IWithDetails;
 export type IWithIcon = Sudojo.com.sudobility.renderable.renderable.IWithIcon;
@@ -55,3 +55,4 @@ export const SudokuLayout = Sudojo.com.sudobility.renderable.sudokuschool.render
 export const AppState = Sudojo.com.sudobility.renderable.renderable.state.AppState;
 export const IOVerb = Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb;
 export type Params = Sudojo.com.sudobility.renderable.renderable.utils.Params;
+export const ThemeColor = Sudojo.com.sudobility.renderable.renderable.utils.ThemeColor;

@@ -1,249 +1,377 @@
-import React, { useRef, useEffect, useCallback } from 'react';
-
-import { AppState, IRenderable } from '../../renderer/types/protocols';
-import * as Sudojo from 'Sudojo';
-import { Nullable } from 'Sudojo';
-
-// Utility function to get color from string or default
-const getColor = (color?: string, defaultColor: string = '#000000'): string => {
-    return color || defaultColor;
-};
+import React, { useRef, useEffect } from "react";
+import { Nullable } from "Sudojo";
+import { AppState, IRenderable } from "../../renderer/types/protocols";
+import UIColor from "../../renderer/utils/UIColor";
+import { RendererColor } from "../../renderer/view/renderers/RendererColor";
 
 const SudokuView: React.FC<{
 	renderable?: Nullable<IRenderable>;
 	asScreen: boolean;
 	isDarkMode: boolean;
 }> = ({ renderable, asScreen, isDarkMode }) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+	let colors = UIColor(asScreen);
 
-    // Font cache to store calculated font sizes by level
-    const fontCache = useRef<{ [key: number]: string }>({});
+	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    // Helper function to calculate font size based on cell size
-    const calculateFontSize = (cellWidth: number, cellHeight: number): string => {
-        const minSize = Math.min(cellWidth, cellHeight);
-        return `${minSize * 0.75}px Arial`;
-    };
+	// Redraw whenever the renderable changes
+	useEffect(() => {
+		if (canvasRef.current && renderable) {
+			const canvas = canvasRef.current;
+			const context = canvas.getContext("2d");
+			if (context) {
+				draw(context, canvas.getBoundingClientRect());
+			}
+		}
+	}, [renderable]);
 
-    // Function to handle navigation
-    const handleNavigate = (renderable: IRenderable) => {
-        AppState.Companion.instance?.navigate(
-            renderable
-        );
-    };
+	const draw = (context: CanvasRenderingContext2D, rect: DOMRect) => {
+		const block = renderable?.view?.withChildren()?.at(0)
+		const cell = block?.view?.withChildren()?.at(0)
+			
+		processBlocks(rect, (renderable, drawRect, borderWidth) => {
+			drawBlock(context, drawRect, renderable, 0);
 
-    // Function to draw text on the canvas
-    const drawText = (
-        ctx: CanvasRenderingContext2D,
-        text: string,
-        x: number,
-        y: number,
-        color: string,
-        fontSize: string
-    ) => {
-        ctx.fillStyle = color;
-        ctx.font = fontSize;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(text, x, y);
-    };
+			// Draw grid border
+			const gridColor = getGridColor(0);
+			if (gridColor) {
+				context.strokeStyle = gridColor;
+				context.lineWidth = borderWidth;
+				context.strokeRect(
+					drawRect.x - borderWidth / 2,
+					drawRect.y - borderWidth / 2,
+					drawRect.width,// + borderWidth,
+					drawRect.height,// + borderWidth
+				);
+			}
 
-    // Function to draw grid lines
-    const drawGrid = (ctx: CanvasRenderingContext2D, rect: DOMRect, gridSize: number) => {
-        ctx.strokeStyle = 'gray';
-        ctx.lineWidth = 1;
+			drawTextAtLevel(context, drawRect, renderable, 0);
+		});
+	};
 
-        // Draw thicker lines for the main Sudoku grid (every 3 cells)
-        for (let i = 1; i < 3; i++) {
-            const x = rect.x + i * (rect.width / 3);
-            const y = rect.y + i * (rect.height / 3);
+	const processBlocks = (
+		rect: DOMRect,
+		callback: (
+			renderable: IRenderable,
+			rect: DOMRect,
+			borderWidth: number
+		) => void
+	) => {
+		if (renderable) {
+			const borderWidth = 2.0;
+			const drawRect = new DOMRect(
+				0 + borderWidth,
+				0 + borderWidth,
+				rect.width - borderWidth * 2,
+				rect.height - borderWidth * 2
+			);
+			callback(renderable, drawRect, borderWidth);
+		}
+	};
 
-            // Horizontal lines
-            ctx.beginPath();
-            ctx.moveTo(rect.x, y);
-            ctx.lineTo(rect.right, y);
-            ctx.stroke();
+	const drawBlock = (
+		context: CanvasRenderingContext2D,
+		rect: DOMRect,
+		renderable: IRenderable,
+		level: number
+	) => {
+		processBlock(
+			rect,
+			renderable,
+			level,
+			(renderable, rect, level, childSize, grid) => {
+				if (level !== 0) {
+					drawBlockBackground(context, rect, renderable);
+				}
+				drawGrid(context, rect, renderable, childSize, grid, level);
+			},
+			(renderable, rect, level) => {
+				drawBlock(context, rect, renderable, level);
+			}
+		);
+	};
 
-            // Vertical lines
-            ctx.beginPath();
-            ctx.moveTo(x, rect.y);
-            ctx.lineTo(x, rect.bottom);
-            ctx.stroke();
-        }
-    };
+	const drawTextAtLevel = (
+		context: CanvasRenderingContext2D,
+		rect: DOMRect,
+		renderable: IRenderable,
+		level: number
+	) => {
+		const fontCache: { [key: number]: number } = {};
 
-    // Function to draw a single block/cell
-    const drawBlock = (
-        ctx: CanvasRenderingContext2D,
-        rect: DOMRect,
-        renderable: IRenderable,
-        level: number
-    ) => {
-        let modifier = renderable.view?.withModifier()
-        // Draw background color if provided
-        if (modifier?.bgColor) {
-            ctx.fillStyle = getColor(modifier?.bgColor?.rawValue, '#FFFFFF');
-            ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-        }
+		processBlock(
+			rect,
+			renderable,
+			level,
+			(renderable, rect, level) => {
+				let font = fontCache[level];
+				if (!font) {
+					font = calculateFont({
+						width: rect.width,
+						height: rect.height,
+					});
+					fontCache[level] = font;
+				}
+				drawText(context, rect, renderable, font);
+			},
+			(renderable, rect, level) => {
+				drawTextAtLevel(context, rect, renderable, level);
+			}
+		);
+	};
 
-        // Draw border if provided
-        if (modifier?.borderColor) {
-            ctx.strokeStyle = getColor(modifier?.borderColor?.rawValue, '#000000');
-            ctx.lineWidth = 2;
-            ctx.strokeRect(rect.x + 1, rect.y + 1, rect.width - 2, rect.height - 2);
-        }
+	const processBlock = (
+		rect: DOMRect,
+		renderable: IRenderable,
+		level: number,
+		processBackground: (
+			renderable: IRenderable,
+			rect: DOMRect,
+			level: number,
+			childSize: { width: number; height: number },
+			grid: number
+		) => void,
+		processChild: (
+			renderable: IRenderable,
+			rect: DOMRect,
+			level: number
+		) => void
+	) => {
+		// Calculate the grid and child size
+		const grid = getGrid(level);
+		const childWidth = (rect.width - grid * 2) / 3;
+		const childHeight = (rect.height - grid * 2) / 3;
+		const childSize = { width: childWidth, height: childHeight };
 
-        let title = renderable.view?.withTitle()
-        // Draw text if available
-        if (title?.text) {
-            const fontSize = fontCache.current[level] || calculateFontSize(rect.width, rect.height);
-            fontCache.current[level] = fontSize; // Cache the font size
+		const children = renderable.view?.withChildren();
+		const number = renderable.view?.withTitle()?.text;
 
-            let labelModifier = title.withModifier()
-            drawText(
-                ctx,
-                title.text,
-                rect.x + rect.width / 2,
-                rect.y + rect.height / 2,
-                getColor(labelModifier?.color?.rawValue, '#000000'),
-                fontSize
-            );
-        }
+		// Call the processBackground function
+		processBackground(renderable, rect, level, childSize, grid);
 
-        // Draw grid lines within the cell if necessary
-        drawGrid(ctx, rect, 3);
-    };
+		// If there are 9 children and the number is null, iterate over the children
+		if (children && children.length === 9 && number == null) {
+			iterateChildren(
+				children,
+				rect,
+				childSize,
+				grid,
+				(child, childRect) => {
+					processChild(child, childRect, level + 1);
+				}
+			);
+		}
+	};
 
-    // Recursive function to process and draw blocks
-    const processBlock = (
-        ctx: CanvasRenderingContext2D,
-        rect: DOMRect,
-        renderable: IRenderable,
-        level: number,
-        gridSize: number
-    ) => {
-        // Draw the current block
-        drawBlock(ctx, rect, renderable, level);
+	const drawBlockBackground = (
+		context: CanvasRenderingContext2D,
+		rect: DOMRect,
+		renderable: IRenderable
+	) => {
+		const modifier = renderable.view?.withModifier();
+		if (modifier?.bgColor) {
+			const bgColor = RendererColor.color(colors, modifier.bgColor);
+			if (bgColor) {
+				context.fillStyle = bgColor;
+				context.fillRect(rect.x, rect.y, rect.width, rect.height);
+			}
+		}
+		if (modifier?.borderColor) {
+			const borderColor = RendererColor.color(
+				colors,
+				modifier.borderColor
+			);
+			if (borderColor) {
+				const borderWidth = 2;
+				context.strokeStyle = borderColor;
+				context.lineWidth = borderWidth;
+				context.strokeRect(
+					rect.x + borderWidth / 2,
+					rect.y + borderWidth / 2,
+					rect.width - borderWidth,
+					rect.height - borderWidth
+				);
+			}
+		}
+	};
 
-        let children = renderable?.view?.withChildren()
-        // If there are child blocks, recursively draw them
-        if (children && children.length === 9 && !renderable?.view?.withTitle()?.text) {
-            const childWidth = (rect.width - gridSize * 2) / 3;
-            const childHeight = (rect.height - gridSize * 2) / 3;
+	const drawGrid = (
+		context: CanvasRenderingContext2D,
+		rect: DOMRect,
+		renderable: IRenderable,
+		childSize: { width: number; height: number },
+		grid: number,
+		level: number
+	) => {
+		const gridColor = getGridColor(level);
+		if (gridColor) {
+			context.strokeStyle = gridColor;
+			context.lineWidth = 1; // You can adjust the line width as needed
 
-            children.forEach((child, index) => {
-                const row = Math.floor(index / 3);
-                const col = index % 3;
-                const childRect = new DOMRect(
-                    rect.x + col * (childWidth + gridSize),
-                    rect.y + row * (childHeight + gridSize),
-                    childWidth,
-                    childHeight
-                );
-                processBlock(ctx, childRect, child, level + 1, gridSize);
-            });
-        }
-    };
+			// Draw horizontal and vertical grid lines
+			for (let i = 1; i < 3; i++) {
+				// Horizontal grid lines
+				const y = rect.y + i * (childSize.height + grid) - grid / 2;
+				context.beginPath();
+				context.moveTo(rect.x, y);
+				context.lineTo(rect.x + rect.width, y);
+				context.stroke();
 
-    // Main draw function
-    const draw = useCallback(
-        (ctx: CanvasRenderingContext2D, rect: DOMRect) => {
-            if (!renderable) return;
+				// Vertical grid lines
+				const x = rect.x + i * (childSize.width + grid) - grid / 2;
+				context.beginPath();
+				context.moveTo(x, rect.y);
+				context.lineTo(x, rect.y + rect.height);
+				context.stroke();
+			}
+		}
+	};
 
-            const borderWidth = 2;
-            const drawRect = new DOMRect(
-                rect.x + borderWidth,
-                rect.y + borderWidth,
-                rect.width - borderWidth * 2,
-                rect.height - borderWidth * 2
-            );
+	const getGridColor = (level: number) => {
+		switch (level) {
+			case 0:
+				return colors.label; // Label color
+			case 1:
+				return colors.secondaryLabel; // Gray color
+			default:
+				return null;
+		}
+	};
 
-            // Draw the outer border
-            if (renderable) {
-                processBlock(ctx, drawRect, renderable, 0, borderWidth);
-            }
-        },
-        [renderable]
-    );
+	const getGrid = (level: number): number => {
+		switch (level) {
+			case 0:
+			case 1:
+				return 1;
+			default:
+				return 0;
+		}
+	};
 
-    // Effect to handle drawing
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
+	const iterateChildren = (
+		children: IRenderable[],
+		parentRect: DOMRect,
+		childSize: { width: number; height: number },
+		grid: number,
+		callback: (child: IRenderable, rect: DOMRect) => void
+	) => {
+		children.forEach((child, index) => {
+			const row = Math.floor(index / 3);
+			const col = index % 3;
+			const x = parentRect.x + col * (childSize.width + grid);
+			const y = parentRect.y + row * (childSize.height + grid);
+			const childRect = new DOMRect(
+				x,
+				y,
+				childSize.width,
+				childSize.height
+			);
+			callback(child, childRect);
+		});
+	};
 
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
+	const drawText = (
+		context: CanvasRenderingContext2D,
+		rect: DOMRect,
+		renderable: IRenderable,
+		fontSize: number
+	) => {
+		const title = renderable.view?.withTitle();
+		if (title && title.text) {
+			// Set the font and color
+ 			const color =
+				RendererColor.color(
+					UIColor(false),
+					title.withModifier()?.color
+				) ?? UIColor(false).label; // Default to 'black'
+			context.font = `${fontSize}px Roboto`; // Adjust the font as needed
+			context.fillStyle = color;
+			context.textAlign = "center";
+			context.textBaseline = "middle";
 
-        const rect = canvas.getBoundingClientRect();
-        // Clear the canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+			// Calculate the position to center the text
+			const x = rect.x + rect.width / 2;
+			const y = rect.y + rect.height / 2;
 
-        const drawRect = new DOMRect(
-            0,
-            0,
-            rect.width,
-            rect.height,
-        );
-        // Start drawing
-        draw(ctx, drawRect);
-    }, [renderable, draw]);
+			// Draw the text
+			context.fillText(title.text, x, y);
+		}
+	};
 
-    // Function to handle touch/click events
-    const handleClick = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
-        const canvas = canvasRef.current;
-        if (!canvas || !renderable) return;
+	// Helper function to calculate font size
+	const calculateFont = (size: { width: number; height: number }): number => {
+		const minSize = Math.min(size.width, size.height);
+		return minSize * 0.75; // 75% of the square size for font
+	};
 
-        const rect = canvas.getBoundingClientRect();
-        const clickX = event.clientX - rect.left;
-        const clickY = event.clientY - rect.top;
+	const handleTouch = (rect: DOMRect, location: { x: number; y: number }) => {
+		processBlocks(rect, (renderable, drawRect) => {
+			touchCell(drawRect, renderable, 0, location);
+		});
+	};
 
-        // Function to detect which cell was clicked
-        const detectClick = (renderable: IRenderable, rect: DOMRect, level: number): boolean => {
-            if (!renderable) return false;
+	const touchCell = (
+		rect: DOMRect,
+		renderable: IRenderable,
+		level: number,
+		location: { x: number; y: number }
+	) => {
+		processBlock(
+			rect,
+			renderable,
+			level,
+			(renderable, rect, level) => {
+				if (containsPoint(rect, location) && level === 2) {
+					touched(renderable);
+				}
+			},
+			(renderable, rect, level) => {
+				if (containsPoint(rect, location) && level <= 2) {
+					touchCell(rect, renderable, level, location);
+				}
+			}
+		);
+	};
 
-            // Check if this block contains the click
-            if (clickX >= rect.x && clickX <= rect.x + rect.width && clickY >= rect.y && clickY <= rect.y + rect.height) {
-                if (level === 2) { // Assuming level 2 is the target level
-                    handleNavigate(renderable);
-                    return true;
-                }
+	// Helper function to check if a point is inside a rectangle
+	const containsPoint = (
+		rect: DOMRect,
+		point: { x: number; y: number }
+	): boolean => {
+		return (
+			point.x >= rect.x &&
+			point.x <= rect.x + rect.width &&
+			point.y >= rect.y &&
+			point.y <= rect.y + rect.height
+		);
+	};
 
-                let children = renderable?.view?.withChildren()
-                // If there are children, check them
-                if (children && children.length === 9) {
-                    const childWidth = (rect.width - 2) / 3;
-                    const childHeight = (rect.height - 2) / 3;
+	const touched = (renderable: IRenderable) => {
+		AppState.Companion.instance?.navigate(renderable);
+	};
 
-                    for (let i = 0; i < 9; i++) {
-                        const row = Math.floor(i / 3);
-                        const col = i % 3;
-                        const childRect = new DOMRect(
-                            rect.x + col * (childWidth + 2),
-                            rect.y + row * (childHeight + 2),
-                            childWidth,
-                            childHeight
-                        );
-                        if (detectClick(children[i], childRect, level + 1)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        };
+	// Function to handle touch/click events
+	const handleClick = (
+		event: React.MouseEvent<HTMLCanvasElement, MouseEvent>
+	) => {
+		const canvas = canvasRef.current;
+		if (!canvas || !renderable) return;
 
-        detectClick(renderable, new DOMRect(0, 0, canvas.width, canvas.height), 0);
-    };
+		const rect = canvas.getBoundingClientRect();
+		const x = event.clientX - rect.left;
+		const y = event.clientY - rect.top;
 
-    return (
-        <canvas
-            ref={canvasRef}
-            width={300}
-            height={300}
-            style={{ border: '1px solid black', touchAction: 'none' }}
-            onClick={handleClick}
-        />
-    );
+		handleTouch(new DOMRect(0, 0, rect.width, rect.height), { x, y });
+	};
+
+	return (
+		<canvas
+			ref={canvasRef}
+			width={500}
+			height={500}
+			style={{ border: "1px solid black", touchAction: "none" }}
+			onClick={handleClick}
+		/>
+	);
 };
 
 export default SudokuView;
