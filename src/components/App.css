@@ -1,0 +1,14 @@
+/* src/App.css */
+
+/* Ensure the main content area has proper padding and layout */
+.main-view {
+    padding: 16px;
+}
+
+/* Customize the appearance of the Sudoku board canvas */
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Add any additional global styles here */

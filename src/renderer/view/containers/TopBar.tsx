@@ -3,8 +3,8 @@
 import React from "react";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { auth } from "../../../firebase";
-import { useAuth } from "../../../AuthContext";
+import { auth } from "../../../components/firebase";
+import { useAuth } from "../../../components/AuthContext";
 import { IRenderable } from "../../types/protocols";
 import { UIDevice } from "../../utils/UIDevice";
 import UIColor from "../../utils/UIColor";

@@ -6,7 +6,7 @@ import 'firebase/auth'; // Firebase Auth
 import * as firebaseui from 'firebaseui'; // FirebaseUI import
 import 'firebaseui/dist/firebaseui.css'; // FirebaseUI CSS
 import { Box } from '@mui/material';
-import { auth } from '../firebase'; // Firebase auth instance
+import { auth } from './firebase'; // Firebase auth instance
 
 // Manually declare the type for FirebaseUI since there are no official TypeScript types
 interface FirebaseUIAuth {
