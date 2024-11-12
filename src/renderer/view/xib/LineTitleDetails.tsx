@@ -4,6 +4,7 @@ import { IRenderable } from "../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../utils/UIColor";
 import RendererContainer from "../renderers/RendererContainer";
+import { Text } from "@radix-ui/themes";
 
 const LineTitleDetail: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -23,8 +24,14 @@ const LineTitleDetail: React.FC<{
 
     return (
         <RendererContainer renderable={renderable} isDarkMode={isDarkMode} styleModifier={styleModifier}>
-            <span style={{ ...CommonStyles.lineSubtitleStyle(labelColor), marginBottom: "4px" }}>{title}</span>
-            <span style={CommonStyles.lineDetailsStyle(labelColor)}>{details}</span>
+            {/* <span style={{ ...CommonStyles.lineSubtitleStyle(labelColor), marginBottom: "4px" }}>{title}</span>
+            <span style={CommonStyles.lineDetailsStyle(labelColor)}>{details}</span> */}
+            <Text color="gray" size="2">
+				{title}
+			</Text>
+            <Text color="gray" size="3" weight="medium">
+				{details}
+			</Text>
         </RendererContainer>
     );
 };

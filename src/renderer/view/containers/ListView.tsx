@@ -23,10 +23,9 @@ const ListView: React.FC<{
 		display: "flex",
 		alignItems: "center",
 		padding: "0px",
-		backgroundColor: UIColor(false).systemGroupedBackground,
-		width: "100%",
+		width: "480px",
+		flexDirection: "column",
 		margin: "0", // No margin on top, left, or right
-		justifyContent: "start", // Align breadcrumbs to the left
 	};
 
 	const itemStyle: React.CSSProperties = {
@@ -44,7 +43,7 @@ const ListView: React.FC<{
 	if (!list) return null;
 
 	return (
-		<List>
+		<List style={containerStyle}>
 			{list.map((child, index) => (
 				<ListItem key={child.id} style={itemStyle}>
 					<Renderer

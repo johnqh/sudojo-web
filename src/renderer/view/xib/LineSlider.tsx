@@ -3,6 +3,7 @@ import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
 import UIColor from "../../utils/UIColor";
 import { FormControl, InputLabel } from "@mui/material";
+import { Text } from "@radix-ui/themes";
 
 const LineSlider: React.FC<{
 	renderable?: Nullable<IRenderable>;

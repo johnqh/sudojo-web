@@ -2,6 +2,7 @@ import React from "react";
 import UIColor from "../../utils/UIColor";
 import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
+import { Text } from "@radix-ui/themes";
 
 const LineTitleSubtitleValue: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -58,10 +59,21 @@ const LineTitleSubtitleValue: React.FC<{
 	return (
 		<div style={containerStyle}>
 			<div style={leftContainerStyle}>
-				<span style={titleStyle}>{title}</span>
-				<span style={subtitleStyle}>{subtitle}</span>
+				{/* <span style={titleStyle}>{title}</span>
+				<span style={subtitleStyle}>{subtitle}</span> */}
+
+			<Text size="3" weight="medium">
+				{title}
+			</Text>
+            <Text color="gray" size="2">
+				{subtitle}
+			</Text>
 			</div>
-			<span style={valueTextStyle}>{valueText}</span>
+			{/* <span style={valueTextStyle}>{valueText}</span> */}
+
+			<Text size="3">
+				{valueText}
+			</Text>
 		</div>
 	);
 };

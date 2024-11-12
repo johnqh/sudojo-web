@@ -2,6 +2,7 @@ import React from "react";
 import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
 import UIColor from "../../utils/UIColor";
+import { Text } from "@radix-ui/themes";
 
 const Header: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -38,7 +39,13 @@ const Header: React.FC<{
 
 	return (
 		<div style={headerStyle}>
-			<div>{title && <span style={titleStyle}>{title}</span>}</div>
+			<div>
+				{title && (
+					<Text color="gray" size="2">
+						{title}
+					</Text>
+				)}
+			</div>
 			<div style={lineStyle} />
 		</div>
 	);

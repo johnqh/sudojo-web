@@ -5,6 +5,7 @@ import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../utils/UIColor";
 import RendererContainer from "../renderers/RendererContainer";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
+import { Text } from "@radix-ui/themes";
 
 const LineImageTitle: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -27,9 +28,12 @@ const LineImageTitle: React.FC<{
             {imageUrl && (
                 <img src={imageUrl} alt={title} style={CommonStyles.lineImageStyle} />
             )}
-            <span style={{ ...CommonStyles.lineTitleStyle(labelColor), marginLeft: "8px" }}>
+            {/* <span style={{ ...CommonStyles.lineTitleStyle(labelColor), marginLeft: "8px" }}>
                 {title}
-            </span>
+            </span> */}
+            <Text size="3" weight="medium">
+				{title}
+			</Text>
         </RendererContainer>
     );
 };

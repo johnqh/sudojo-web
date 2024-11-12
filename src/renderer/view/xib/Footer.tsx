@@ -4,6 +4,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Nullable } from 'Sudojo';
 import { IRenderable } from '../../types/protocols';
+import { Text } from "@radix-ui/themes";
 
 const Footer: React.FC<{
 	renderable?: Nullable<IRenderable>;

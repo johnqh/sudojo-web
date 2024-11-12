@@ -4,6 +4,7 @@ import { IRenderable } from "../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../utils/UIColor";
 import RendererContainer from "../renderers/RendererContainer";
+import { Text } from "@radix-ui/themes";
 
 const LineAction: React.FC<{
 	renderable?: Nullable<IRenderable>;
@@ -21,7 +22,10 @@ const LineAction: React.FC<{
     
     return (
         <RendererContainer renderable={renderable} isDarkMode={isDarkMode} styleModifier={styleModifier}>
-            <span style={CommonStyles.lineTitleStyle(labelColor)}>{title}</span>
+            {/* <span style={CommonStyles.lineTitleStyle(labelColor)}>{title}</span> */}
+            <Text size="3" weight="bold" color="blue">
+				{title}
+			</Text>
         </RendererContainer>
     );
 };
