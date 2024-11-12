@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import Footer from "../../components/Footer";
-import TabBar from "../components/TabBar";
+import Footer from "../view/xib/Footer";
+import TabBar from "../view/xib/TabBar";
 import UINavigationController from "./UINavigationController";
 import TopBar from "../view/containers/TopBar";
 import { Nullable } from "Sudojo";
@@ -74,7 +74,7 @@ const UITabBarController: React.FC<{
 			</Box>
 
 			{/* Footer - positioned below the main content and drawer */}
-			<Footer />
+			<Footer asScreen={false} isDarkMode={false} />
 		</Box>
 	);
 };

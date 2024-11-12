@@ -2,8 +2,17 @@
 
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { Nullable } from 'Sudojo';
+import { IRenderable } from '../../types/protocols';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{
+	renderable?: Nullable<IRenderable>;
+	asScreen: boolean;
+	isDarkMode: boolean;
+}> = ({ renderable, asScreen, isDarkMode }) => {
+    const view = renderable?.withView(asScreen)
+    const title = view?.withTitle()?.text;
+    const subtitle = view?.withSubtitle()?.text;
     return (
         <Box
             component="footer"
@@ -16,11 +25,11 @@ const Footer: React.FC = () => {
             }}
         >
             <Typography variant="body2" color="textSecondary">
-                &copy; {new Date().getFullYear()} Your Company Name. All rights
+                &copy; {new Date().getFullYear()} {title}. All rights
                 reserved.
             </Typography>
             <Typography variant="body2" color="textSecondary">
-                Contact: info@yourcompany.com
+                Contact: {subtitle}
             </Typography>
         </Box>
     );

@@ -43,6 +43,7 @@ import LineSlider from "./xib/LineSlider";
 import LineAction from "./xib/LineAction";
 import StackedHorizontal from "./containers/StackedHorizontal";
 import StackedVertical from "./containers/StackedVertical";
+import Footer from "./xib/Footer";
 
 export default class ViewMapping {
 	static shared?: ViewMapping;
@@ -90,6 +91,7 @@ export default class ViewMapping {
 		fab: Fab,
 		fab_mini: FabMini,
 		fab_extended: FabExtended,
+		footer: Footer,
 
 		tile: Tile,
 

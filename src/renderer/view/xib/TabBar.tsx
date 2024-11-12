@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Drawer } from "@mui/material";
-import { IRenderable } from "../types/protocols";
-import NavigationMenu from "../view/containers/NavigationMenu";
+import { IRenderable } from "../../types/protocols";
+import NavigationMenu from "../containers/NavigationMenu";
 import { Nullable } from "Sudojo";
 
 const TabBar: React.FC<{
