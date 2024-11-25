@@ -54,5 +54,6 @@ export const SudokuLayout = Sudojo.com.sudobility.renderable.sudokuschool.render
 
 export const AppState = Sudojo.com.sudobility.renderable.renderable.state.AppState;
 export const IOVerb = Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb;
+export const FileLocation = Sudojo.com.sudobility.renderable.renderable.protocols.FileLocation;
 export type Params = Sudojo.com.sudobility.renderable.renderable.utils.Params;
 export const ThemeColor = Sudojo.com.sudobility.renderable.renderable.utils.ThemeColor;

@@ -1,6 +1,6 @@
 import * as Sudojo  from 'Sudojo';
 import { Nullable } from 'Sudojo';
-import { INativeIO, IOVerb, Params, ViewLayout } from '../types/protocols';
+import { INativeIO, IOVerb, Params, FileLocation } from '../types/protocols';
 
 class RendererIO implements INativeIO {
     http(
@@ -64,6 +64,7 @@ class RendererIO implements INativeIO {
     file(
         verb: Sudojo.com.sudobility.renderable.renderable.protocols.IOVerb,
         url: string,
+        location: Sudojo.com.sudobility.renderable.renderable.protocols.FileLocation,
         body: Nullable<string>,
         callback: (
             p0: number,
@@ -71,41 +72,45 @@ class RendererIO implements INativeIO {
             p2: Nullable<string>
         ) => void
     ): void {
-        try {
-            switch (verb) {
-                case IOVerb.GET:
-                    // Read from local storage
-                    const data = localStorage.getItem(url);
-                    if (data) {
-                        callback(200, data, null); // Successful read
-                    } else {
-                        callback(404, null, "Not Found"); // Data not found
-                    }
-                    break;
-                    
-                case IOVerb.POST:
-                case IOVerb.PUT:
-                    // Write to local storage
-                    if (body) {
-                        localStorage.setItem(url, body);
-                        callback(200, null, null); // Successful write
-                    } else {
-                        callback(400, null, "Bad Request"); // No body provided
-                    }
-                    break;
-    
-                case IOVerb.DELETE:
-                    // Remove from local storage
-                    localStorage.removeItem(url);
-                    callback(204, null, null); // Successful delete
-                    break;
-    
-                default:
-                    callback(400, null, "Invalid Verb"); // Invalid HTTP verb
-                    break;
+        if (location == Sudojo.com.sudobility.renderable.renderable.protocols.FileLocation.DOCUMENT) {
+            try {
+                switch (verb) {
+                    case IOVerb.GET:
+                        // Read from local storage
+                        const data = localStorage.getItem(url);
+                        if (data) {
+                            callback(200, data, null); // Successful read
+                        } else {
+                            callback(404, null, "Not Found"); // Data not found
+                        }
+                        break;
+                        
+                    case IOVerb.POST:
+                    case IOVerb.PUT:
+                        // Write to local storage
+                        if (body) {
+                            localStorage.setItem(url, body);
+                            callback(200, null, null); // Successful write
+                        } else {
+                            callback(400, null, "Bad Request"); // No body provided
+                        }
+                        break;
+        
+                    case IOVerb.DELETE:
+                        // Remove from local storage
+                        localStorage.removeItem(url);
+                        callback(204, null, null); // Successful delete
+                        break;
+        
+                    default:
+                        callback(400, null, "Invalid Verb"); // Invalid HTTP verb
+                        break;
+                }
+            } catch (error) {
+                callback(500, null, null); // Handle any errors
             }
-        } catch (error) {
-            callback(500, null, null); // Handle any errors
+        } else {
+            callback(400, null, "Invalid Verb"); // Invalid HTTP verb
         }
     }
 
