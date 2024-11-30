@@ -3,7 +3,7 @@ import { Nullable } from 'Sudojo';
 import RendererIO from '../../renderer/injections/RendererIO';
 import Login from '../../renderer/injections/Login';
 import Screen from '../../renderer/injections/Screen';
-import { IRenderable } from '../../renderer/types/protocols';
+import { BuildType, IRenderable } from '../../renderer/types/protocols';
 
 class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.statemanager
     .SudokuAppState {
@@ -12,6 +12,7 @@ class WebSudokuAppState extends Sudojo.com.sudobility.renderable.sudokuschool.st
         setRoot: (renderable: Nullable<IRenderable>) => void
     ) {
         super(
+            Sudojo.com.sudobility.renderable.renderable.state.BuildType.DEBUG, 
             // @ts-ignore
             new RendererIO(),
             new Login(),
