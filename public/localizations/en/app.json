@@ -1,0 +1,117 @@
+{
+    "ERROR": "ERROR",
+    "PLAY": {
+        "TITLE": "Play",
+        "DAILY": "Daily"
+    },
+    "ENTER": {
+        "TITLE": "Enter Sudoku",
+        "SCAN": {
+            "TITLE": "Scan",
+            "CAMERA": "Camera",
+            "ALBUM": "Album"
+        },
+        "FINISH": "Finish"
+    },
+    "LEVELS": {
+        "TITLE": "Courses",
+        "1": {
+            "TITLE": "Basics",
+            "SUBTITLE": "Learning the basics"
+        },
+        "2": {
+            "TITLE": "Easy",
+            "SUBTITLE": "Simple logics"
+        },
+        "3": {
+            "TITLE": "Moderate",
+            "SUBTITLE": "Moderate difficulties"
+        },
+        "4": {
+            "TITLE": "Challenging",
+            "SUBTITLE": "Getting a little bit harder"
+        },
+        "5": {
+            "TITLE": "Difficult",
+            "SUBTITLE": "Only 5% can master this"
+        },
+        "6": {
+            "TITLE": "Expert",
+            "SUBTITLE": "Expert Sudoku solvers"
+        },
+        "7": {
+            "TITLE": "Extreme",
+            "SUBTITLE": "Extreme techniques"
+        },
+        "8": {
+            "TITLE": "Brain Freeze",
+            "SUBTITLE": "This will give you a headache"
+        }
+    },
+    "TECHNIQUES": {
+        "TITLE": "Learn",
+        "SECTION": "Techniques",
+        "FULL_HOUSE": "Full House",
+        "HIDDEN_SINGLE": "Hidden Single",
+        "NAKED_SINGLE": "Naked Single",
+        "HIDDEN_PAIR": "Hidden Pair",
+        "NAKED_PAIR": "Naked Pair",
+        "LOCKED_CANDIDATE": "Locked Candidate",
+        "HIDDEN_TRIPLE": "Hidden Triple",
+        "HIDDEN_QUAD": "Hidden Quad",
+        "NAKED_TRIPLE": "Naked Triple",
+        "NAKED_QUAD": "Naked Quad",
+        "X_WING": "X-Wing",
+        "SWORDFISH": "Swordfish",
+        "JELLYFISH": "Jellyfish",
+        "XY_WING": "XY-Wing",
+        "FINNED_X_WING": "Finned X-Wing",
+        "SQUIRMBAG": "Squirmbag",
+        "FINNED_SWORDFISH": "Finned Swordfish",
+        "FINNED_JELLYFISH": "Finned Jellyfish",
+        "XYZ_WING": "XYZ-Wing",
+        "WXYZ_WING": "WXYZ-Wing",
+        "ALMOST_LOCKED_SETS": "Almost Locked Sets",
+        "FINNED_SQUIRMBAG": "Finned Squirmbag",
+        "ALS_CHAIN": "ALS Chain"
+    },
+    "ACTIONS": {
+        "UNDO": "Undo",
+        "ERASE": "Erase",
+        "AUTOPENCIL": "Auto",
+        "PENCIL": "Notes",
+        "HINT": "Hint"
+    },
+    "HINT": {
+        "CANCEL": "Cancel",
+        "BACK": "Back",
+        "NEXT": "Next",
+        "APPLY": "Apply"
+    },
+    "PROFILE": {
+        "TITLE": "Profile",
+        "USER": {
+            "TITLE": "User",
+            "LOG_IN": "Log in",
+            "LOG_OUT": "Log out"
+        },
+        "SUBSCRIPTION": {
+            "TITLE": "Subscription",
+            "SUBSCRIBED": "Already Subscribed",
+            "SUBSCRIBE": "Subscribe",
+            "Restore": "Restore"
+        }
+    },
+    "SETTINGS": {
+        "TITLE": "Settings",
+        "SHOW_ERRORS": "Show Errors",
+        "ENABLE_ANIMATION": "Enable Animation",
+        "SYMMETRICAL": "Symmetrical",
+        "DISPLAY": {
+            "TITLE": "Display",
+            "NUMERIC": "Numeric",
+            "KANJI": "Kanji",
+            "COLORS": "Colors"
+        }
+    }
+}

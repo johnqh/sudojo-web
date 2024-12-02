@@ -58,3 +58,4 @@ export const FileLocation = Sudojo.com.sudobility.renderable.renderable.protocol
 export type Params = Sudojo.com.sudobility.renderable.renderable.utils.Params;
 export const ThemeColor = Sudojo.com.sudobility.renderable.renderable.utils.ThemeColor;
 export const BuildType = Sudojo.com.sudobility.renderable.renderable.state.BuildType;
+export const DynamicLocalizer = Sudojo.com.sudobility.renderable.localizer.DynamicLocalizer;
