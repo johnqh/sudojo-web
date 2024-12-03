@@ -1,4 +1,7 @@
 {
+    "APP": {
+        "TITLE": "Sudojo"
+    },
     "ERROR": "ERROR",
     "PLAY": {
         "TITLE": "Play",
@@ -111,7 +114,13 @@
             "TITLE": "Display",
             "NUMERIC": "Numeric",
             "KANJI": "Kanji",
-            "COLORS": "Colors"
+            "COLORS": "Colors",
+            "EMOJIS": "Emojis"
         }
+    },
+    "NUMBERS": {
+        "NUMERIC": ["", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+        "KANJI": ["", "一", "二", "三", "四", "五", "六", "七", "八", "九"],
+        "EMOJIS": ["", "🩷", "😭", "💀", "🔥", "🛒", "🫶🏻", "🙏", "🎉", "✅"]
     }
 }

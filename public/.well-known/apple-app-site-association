@@ -1,0 +1,32 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appIDs": [
+                    "{PLACE_YOUR_APP_ID_HERE}"
+                ],
+                "components": [
+                    {
+                        "/": "/"
+                    },
+                    {
+                        "/levels": "/levels"
+                    },
+                    {
+                        "/techniques": "/techniques"
+                    },
+                    {
+                        "/levels/*": "/levels/*"
+                    },
+                    {
+                        "/techniques/*": "/techniques/*"
+                    },
+                    {
+                        "/play": "/play"
+                    }
+                ]
+            }
+        ]
+    }
+}
