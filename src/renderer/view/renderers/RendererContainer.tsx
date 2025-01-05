@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Nullable } from "Sudojo";
 import { IRenderable } from "../../types/protocols";
 import CommonStyles from "../renderers/CommonStyles";
@@ -49,7 +49,6 @@ const RendererContainer: React.FC<{
         }),
         ...styleModifier,
     };
-
     return (
         <div
             style={containerStyle}

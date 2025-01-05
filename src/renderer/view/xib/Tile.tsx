@@ -5,7 +5,6 @@ import CommonStyles from "../renderers/CommonStyles";
 import UIColor from "../../utils/UIColor";
 import { imageUrlOf } from "../../utils/IRenderableImage+Url";
 import RendererContainer from "../renderers/RendererContainer";
-import { Text } from "@radix-ui/themes";
 
 const Tile: React.FC<{
     renderable?: Nullable<IRenderable>;

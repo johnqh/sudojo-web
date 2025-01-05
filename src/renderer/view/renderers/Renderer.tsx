@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { IRenderable } from "../../types/protocols";
 import { Nullable } from "Sudojo";
 import ViewMapping from "../ViewMapping";
@@ -7,7 +7,7 @@ const Renderer: React.FC<{
 	renderable?: Nullable<IRenderable>;
 	asScreen: boolean;
 	isDarkMode: boolean;
-}> = ({ renderable, asScreen, isDarkMode }) => {
+}> = memo(({ renderable, asScreen, isDarkMode }) => {
 	// Get the component based on the type
 	const Component = ViewMapping.shared?.get(renderable?.view?.layout);
 
@@ -24,6 +24,6 @@ const Renderer: React.FC<{
 			isDarkMode={isDarkMode}
 		/>
 	);
-};
+});
 
 export default Renderer;

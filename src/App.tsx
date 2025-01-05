@@ -11,14 +11,15 @@ import UIWindow from "./renderer/screen/UIWindow";
 import ViewMapping from "./renderer/view/ViewMapping";
 import { AppState } from "./renderer/types/protocols";
 import SudokuView from "./sudokurenderer/renderer/SudokuView";
-import SpacedVertical from "./renderer/view/containers/SpacedVertical";
+import StackedVertical from "./renderer/view/containers/StackedVertical";
 
 const AppContent: React.FC = () => {
 	useEffect(() => {
 		ViewControllerMapping.shared = ViewControllerMapping.defaultAnd({});
 		ViewMapping.shared = ViewMapping.defaultAnd({
+			// pencil: Pencil,
 			sudoku_grid: SudokuView,
-			sudoku_game: SpacedVertical,
+			sudoku_game: StackedVertical,
 		});
 		return () => {};
 	}, []);

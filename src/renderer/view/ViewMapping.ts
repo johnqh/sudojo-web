@@ -44,6 +44,11 @@ import LineAction from "./xib/LineAction";
 import StackedHorizontal from "./containers/StackedHorizontal";
 import StackedVertical from "./containers/StackedVertical";
 import Footer from "./xib/Footer";
+import Paragraph from "./xib/Paragraph";
+import EmbeddedImage from "./xib/EmbeddedImage";
+import { Console } from "console";
+import LineText from "./xib/LineText";
+import JustImage from "./xib/JustImage";
 
 export default class ViewMapping {
 	static shared?: ViewMapping;
@@ -61,6 +66,7 @@ export default class ViewMapping {
 		list: ListView,
 		list_simple: ListView,
 		list_sectioned: ListView,
+		list_paragraphs: ListView,
 
 		grid: GridView,
 		grid_simple: GridView,
@@ -93,8 +99,10 @@ export default class ViewMapping {
 		fab_extended: FabExtended,
 		footer: Footer,
 
+		// toggle: Toggle,
 		tile: Tile,
 
+		line_text: LineText,
 		line_title: LineTitle,
 		line_title_value: LineTitleValue,
 		line_title_subtitle: LineTitleSubtitle,
@@ -106,6 +114,10 @@ export default class ViewMapping {
 
 		center: Center,
 		center_image: CenterImage,
+		just_image: JustImage,
+		
+		paragraph: Paragraph,
+		embedded_image: EmbeddedImage,
 
 		// text_markup: TextMarkup,
 
@@ -170,6 +182,11 @@ export default class ViewMapping {
 		  }>
 		| undefined {
 		if (!key) return undefined;
-		return this.mapping[key];
+		const renderer = this.mapping[key];
+		if (renderer == CenterImage) {
+			console.log(key);
+			console.log("CenterImage");
+		}
+		return renderer;
 	}
 }
